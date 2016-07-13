@@ -1,4 +1,4 @@
-import App from './components/App'
+import App from './containers/App'
 import HomePage from './containers/HomePage'
 import DoctorSearchPage from './containers/DoctorSearchPage'
 import HospitalSearchPage from './containers/HospitalSearchPage'
