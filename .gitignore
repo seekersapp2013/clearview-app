@@ -1,0 +1,23 @@
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# build and dependencies
+node_modules
+build
+www/bundle.js
+
+.DS_Store
+
+# Cordova Structure
+plugins/*
+platforms/*
+hooks/*
+plugins/*
+
+hooks/README.md
