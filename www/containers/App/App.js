@@ -1,5 +1,6 @@
 import './App.styl'
 import React from 'react'
+import 'react-fastclick'
 
 class App extends React.Component {
   blurFocus () {

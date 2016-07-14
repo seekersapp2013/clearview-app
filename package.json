@@ -1,5 +1,5 @@
 {
-  "name": "clearview-app-noredux",
+  "name": "clearview-app-no-redux",
   "version": "1.0.0",
   "description": "",
   "main": "www/app.js",
@@ -13,10 +13,15 @@
   "license": "MIT",
   "dependencies": {
     "autoprefixer": "^6.3.7",
+    "axios": "^0.13.0",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
+    "es6-promise": "^3.2.1",
     "path": "^0.12.7",
     "react": "^15.2.1",
+    "react-addons-shallow-compare": "^15.2.1",
+    "react-fastclick": "^2.1.2",
+    "react-virtualized": "^7.12.1",
     "stylus": "^0.54.5",
     "webpack": "^1.13.1"
   },
