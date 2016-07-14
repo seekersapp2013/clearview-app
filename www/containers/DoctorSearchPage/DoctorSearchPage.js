@@ -42,7 +42,7 @@ class DoctorSearchPage extends React.Component {
     return (
       <div>
         <HomeLink />
-        {Doctor} Search Page
+        Doctor Search Page
         <VirtualScroll
           className="doctor-list-scroll-container"
           width={document.documentElement.clientWidth}
