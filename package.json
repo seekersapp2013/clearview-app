@@ -20,6 +20,7 @@
     "path": "^0.12.7",
     "react": "^15.2.1",
     "react-addons-shallow-compare": "^15.2.1",
+    "react-debounce-input": "^2.4.0",
     "react-fastclick": "^2.1.2",
     "react-virtualized": "^7.12.1",
     "stylus": "^0.54.5",
