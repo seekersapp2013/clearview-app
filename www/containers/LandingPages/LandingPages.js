@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
 import SearchPage from '../../containers/SearchPage'
+import FooterNav from '../../components/FooterNav'
 
 const API_ROOT = 'http://clearviewcancer.com:3000'
 const API_URLS = {
@@ -110,8 +111,15 @@ class PharmacyPage extends React.Component {
 class AppointmentPage extends React.Component {
   render () {
     return (
-      <div className="AppointmentPage">
-        <h1>Appointments</h1>
+      <div className="AppContainer">
+        <main className="AppointmentPage">
+          <div>
+            <h1>Appointments</h1>
+          </div>
+        </main>
+        <footer>
+          <FooterNav />
+        </footer>
       </div>
     )
   }
