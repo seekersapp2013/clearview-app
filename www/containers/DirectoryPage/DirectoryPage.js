@@ -89,16 +89,16 @@ class DirectoryPage extends React.Component {
     })
   }
 
-  doesMatch (str) {
-    return (key) => (key + '').toLowerCase().indexOf(str) !== -1
-  }
-
   filterItemsFromLocalStorage (searchString) {
     const {items} = this.state
     const str = searchString.toLowerCase()
+    let doesMatch = function (str) {
+      return (key) => (key + '').toLowerCase().indexOf(str) !== -1
+    }
     let itemsShown = (str !== '')
-      ? items.filter((r) => Object.values(r).some(this.doesMatch(str)))
+      ? items.filter((r) => Object.values(r).some(doesMatch(str)))
       : []
+
     this.setState({
       itemsShown: itemsShown,
       loading: false
