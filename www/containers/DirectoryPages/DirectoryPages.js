@@ -13,11 +13,14 @@ const API_URLS = {
 
 class DoctorDirectoryPage extends React.Component {
   itemRenderer (doctor) {
+    let itemLink = '#/doctors/' + encodeURIComponent(JSON.stringify(doctor))
     return (
       <div
         className="Results__ListItem Results__ListItem--doctor"
         key={doctor._id}>
-        {doctor.LastName}, {doctor.FirstName}
+        <a href={itemLink}>
+          {doctor.LastName}, {doctor.FirstName}
+        </a>
       </div>
     )
   }
@@ -40,11 +43,14 @@ class DoctorDirectoryPage extends React.Component {
 
 class HospitalDirectoryPage extends React.Component {
   itemRenderer (hospital) {
+    let itemLink = '#/hospitals/' + encodeURIComponent(JSON.stringify(hospital))
     return (
       <div
         className="Results__ListItem Results__ListItem--hospital"
         key={hospital._id}>
-        {hospital.Name} {hospital.City}
+        <a href={itemLink}>
+          {hospital.Name} {hospital.City}
+        </a>
       </div>
     )
   }
@@ -67,11 +73,14 @@ class HospitalDirectoryPage extends React.Component {
 
 class PharmacyDirectoryPage extends React.Component {
   itemRenderer (pharmacy) {
+    let itemLink = '#/pharmacies/' + encodeURIComponent(JSON.stringify(pharmacy))
     return (
       <div
         className="Results__ListItem Results__ListItem--hospital"
         key={pharmacy._id}>
-        {pharmacy.Name} {pharmacy.City}
+        <a href={itemLink}>
+          {pharmacy.Name} {pharmacy.City}
+        </a>
       </div>
     )
   }

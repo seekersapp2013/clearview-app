@@ -19,11 +19,11 @@ export default([
     indexRoute: {component: HomePage},
     childRoutes: [
       {path: '/doctors', component: DoctorDirectoryPage},
-      {path: '/doctors/:id', component: DoctorDetailPage},
+      {path: '/doctors/:item', component: DoctorDetailPage},
       {path: '/hospitals', component: HospitalDirectoryPage},
-      {path: '/hospitals/:id', component: HospitalDetailPage},
+      {path: '/hospitals/:item', component: HospitalDetailPage},
       {path: '/pharmacies', component: PharmacyDirectoryPage},
-      {path: '/pharmacies/:id', component: PharmacyDetailPage}
+      {path: '/pharmacies/:item', component: PharmacyDetailPage}
     ]
   },
   {

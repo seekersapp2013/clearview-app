@@ -3,17 +3,21 @@ import DetailPage from '../DetailPage'
 
 class DoctorDetailPage extends React.Component {
   renderItem (item) {
-    <div>
-      {item.LastName}, {item.FirstName}
-      {item.PracticeName}
-    </div>
+    return (
+      <div>
+        {item.LastName}, {item.FirstName}
+        {item.PracticeName}
+      </div>
+    )
   }
 
   render () {
+    const item = this.renderItem(JSON.parse(decodeURIComponent(this.props.params.item)))
     return (
       <DetailPage
         title="Doctor Detail Page"
-        itemRenderer={::this.renderItem}
+        directoryLink="/doctors"
+        item={item}
       />
     )
   }
@@ -21,18 +25,22 @@ class DoctorDetailPage extends React.Component {
 
 class HospitalDetailPage extends React.Component {
   renderItem (item) {
-    <div>
-      {item.Name}
-      {item.City}
-      {item.State}
-    </div>
+    return (
+      <div>
+        {item.Name}
+        {item.City}
+        {item.State}
+      </div>
+    )
   }
 
   render () {
+    const item = this.renderItem(JSON.parse(decodeURIComponent(this.props.params.item)))
     return (
       <DetailPage
         title="Hospital Detail Page"
-        itemRenderer={::this.renderItem}
+        directoryLink="/hospitals"
+        item={item}
       />
     )
   }
@@ -40,21 +48,31 @@ class HospitalDetailPage extends React.Component {
 
 class PharmacyDetailPage extends React.Component {
   renderItem (item) {
-    <div>
-      {item.Name}
-      {item.City}
-      {item.State}
-    </div>
+    return (
+      <div>
+        {item.Name}
+        {item.City}
+        {item.State}
+      </div>
+    )
   }
 
   render () {
+    const item = this.renderItem(JSON.parse(decodeURIComponent(this.props.params.item)))
     return (
       <DetailPage
         title="Pharmacy Detail Page"
-        itemRenderer={::this.renderItem}
+        directoryLink="/pharmacies"
+        item={item}
       />
     )
   }
+}
+
+DoctorDetailPage.propTypes =
+HospitalDetailPage.propTypes =
+PharmacyDetailPage.propTypes = {
+  params: React.PropTypes.object.isRequired
 }
 
 export {
