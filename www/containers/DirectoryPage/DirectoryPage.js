@@ -1,11 +1,13 @@
 import React from 'react'
 import HomeLink from '../../components/HomeLink'
-import axios from 'axios'
+import Axios from 'axios'
 import DebouncedInput from 'react-debounce-input'
 import ResultsList from '../../components/ResultsList'
-
 require('es6-promise').polyfill()
-const browserStorage = (typeof window.localStorage === 'undefined') ? null : window.localStorage
+
+const browserStorage = (typeof window.localStorage === 'undefined')
+  ? null
+  : window.localStorage
 
 class DirectoryPage extends React.Component {
   constructor (props) {
@@ -23,7 +25,7 @@ class DirectoryPage extends React.Component {
   getAllItems () {
     let page = this
     let getItems = new Promise((resolve, reject) => {
-      axios.get(page.props.getAllItemsUrl)
+      Axios.get(page.props.getAllItemsUrl)
         .then(function (response) {
           resolve(response.data.message)
         })
@@ -70,7 +72,7 @@ class DirectoryPage extends React.Component {
   filterItemsWithAPI (searchString) {
     let searchUrl = this.props.searchItemsUrl + searchString
     let getItems = new Promise((resolve, reject) => {
-      axios.get(searchUrl)
+      Axios.get(searchUrl)
         .then(response => {
           resolve(response.data.message)
         })
