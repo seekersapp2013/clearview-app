@@ -1,13 +1,13 @@
 import React from 'react'
-import HomeLink from '../../components/HomeLink'
+import BackLink from '../../components/BackLink'
 import FooterNav from '../../components/FooterNav'
 
 class AppointmentPage extends React.Component {
   render () {
     return (
-      <div className="AppContainer">
-        <HomeLink />
-        <main className="AppointmentPage">
+      <div className="Page AppointmentPage">
+        <BackLink to="/" text="Home" />
+        <main>
           <div>
             <h1>Appointments</h1>
           </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeLink from '../../components/HomeLink'
+import BackLink from '../../components/BackLink'
 import Axios from 'axios'
 import DebouncedInput from 'react-debounce-input'
 import ResultsList from '../../components/ResultsList'
@@ -146,8 +146,8 @@ class DirectoryPage extends React.Component {
 
   render () {
     return (
-      <div className="SearchPage">
-        <HomeLink />
+      <div className="Page DirectoryPage">
+        <BackLink to="/" text="Home" />
         <div>
           <DebouncedInput
             debounceTimeout={300}

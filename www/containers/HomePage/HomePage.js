@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 class HomePage extends React.Component {
   render () {
     return (
-      <div className="page HomePage">
+      <div className="Page HomePage">
         <nav>
           <Link to="/doctors">Doctors</Link>
           <Link to="/hospitals">Hospitals</Link>
