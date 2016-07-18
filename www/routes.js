@@ -1,13 +1,11 @@
 import App from './containers/App'
-
+import AppointmentPage from './containers/AppointmentPage'
 import {
   HomePage,
   DoctorDirectoryPage,
   HospitalDirectoryPage,
-  PharmacyDirectoryPage,
-  AppointmentPage
-} from './containers/LandingPages'
-
+  PharmacyDirectoryPage
+} from './containers/DirectoryPages'
 import {
   DoctorDetailPage,
   HospitalDetailPage,
