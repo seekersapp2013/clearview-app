@@ -28,7 +28,6 @@ class DirectoryPage extends React.Component {
           resolve(response.data.message)
         })
         .catch(function (error) {
-          console.log(error)
           let items = JSON.parse(browserStorage.getItem(page.props.localStorageKey))
           if (browserStorage !== null && items && items.length > 0) {
             page.setState({
@@ -46,7 +45,8 @@ class DirectoryPage extends React.Component {
         let itemsString = JSON.stringify(items)
         let shouldSaveToStorage = !page.state.loadedFromLocalStorage
         page.setState({
-          items: items
+          items: items,
+          itemsShown: items
         })
         if (shouldSaveToStorage) {
           browserStorage.setItem(page.props.localStorageKey, itemsString)
@@ -62,16 +62,16 @@ class DirectoryPage extends React.Component {
 
   componentDidMount () {
     this.getAllItems()
+    this.setState({
+      itemsShown: this.state.items
+    })
   }
 
   filterItemsWithAPI (searchString) {
-    console.log(searchString)
     let searchUrl = this.props.searchItemsUrl + searchString
-    console.log(searchUrl)
     let getItems = new Promise((resolve, reject) => {
       axios.get(searchUrl)
         .then(response => {
-          console.log(response.data)
           resolve(response.data.message)
         })
         .catch(error => {
@@ -79,8 +79,11 @@ class DirectoryPage extends React.Component {
         })
     })
     Promise.all([getItems]).then(itemArrays => {
+      let itemsShown = (itemArrays[0].length > 0)
+        ? itemArrays[0]
+        : []
       this.setState({
-        itemsShown: itemArrays[0],
+        itemsShown: itemsShown,
         loading: false
       })
     })
@@ -95,7 +98,7 @@ class DirectoryPage extends React.Component {
     const str = searchString.toLowerCase()
     let itemsShown = (str !== '')
       ? items.filter((r) => Object.values(r).some(this.doesMatch(str)))
-      : items
+      : []
     this.setState({
       itemsShown: itemsShown,
       loading: false
@@ -127,13 +130,11 @@ class DirectoryPage extends React.Component {
   }
 
   render () {
-    let itemsShown = (this.state.itemsShown.length) ? this.state.itemsShown : this.state.items
     return (
       <div className="SearchPage">
         <HomeLink />
         <div>
           <DebouncedInput
-            minLength={2}
             debounceTimeout={300}
             onChange={::this.handleSearchStringChange}
             type="text"
@@ -146,7 +147,7 @@ class DirectoryPage extends React.Component {
         <div>{this.props.title}</div>
         <div className="Results__container">
           <ResultsList
-            items={itemsShown}
+            items={this.state.itemsShown}
             itemHeight={20}
             width={document.documentElement.clientWidth}
             height={document.documentElement.clientHeight - 100}

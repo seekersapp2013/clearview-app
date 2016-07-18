@@ -6,4 +6,9 @@ class DetailPage extends React.Component {
   }
 }
 
+DetailPage.propTypes = {
+  title: React.PropTypes.string.isRequired,
+  itemRenderer: React.PropTypes.func.isRequired
+}
+
 export default DetailPage
