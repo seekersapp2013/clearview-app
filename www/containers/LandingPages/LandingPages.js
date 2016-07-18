@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router'
-import SearchPage from '../../containers/SearchPage'
+import DirectoryPage from '../../containers/SearchPage'
 import FooterNav from '../../components/FooterNav'
 
 const API_ROOT = 'http://clearviewcancer.com:3000'
@@ -27,7 +27,7 @@ class HomePage extends React.Component {
   }
 }
 
-class DoctorPage extends React.Component {
+class DoctorDirectoryPage extends React.Component {
   itemRenderer (doctor) {
     return (
       <div
@@ -39,7 +39,7 @@ class DoctorPage extends React.Component {
   }
   render () {
     return (
-      <SearchPage
+      <DirectoryPage
         title="Doctors"
         icon="a"
         searchInstructions="Search by Name or Specialty"
@@ -54,7 +54,7 @@ class DoctorPage extends React.Component {
   }
 }
 
-class HospitalPage extends React.Component {
+class HospitalDirectoryPage extends React.Component {
   itemRenderer (hospital) {
     return (
       <div
@@ -66,7 +66,7 @@ class HospitalPage extends React.Component {
   }
   render () {
     return (
-      <SearchPage
+      <DirectoryPage
         title="Hospitals"
         icon="b"
         searchInstructions="Search by Name or Location"
@@ -81,7 +81,7 @@ class HospitalPage extends React.Component {
   }
 }
 
-class PharmacyPage extends React.Component {
+class PharmacyDirectoryPage extends React.Component {
   itemRenderer (pharmacy) {
     return (
       <div
@@ -93,7 +93,7 @@ class PharmacyPage extends React.Component {
   }
   render () {
     return (
-      <SearchPage
+      <DirectoryPage
         title="Pharmacies"
         icon="c"
         searchInstructions="Search by Name or Location"
@@ -125,4 +125,10 @@ class AppointmentPage extends React.Component {
   }
 }
 
-export {HomePage, DoctorPage, HospitalPage, PharmacyPage, AppointmentPage}
+export {
+  HomePage,
+  DoctorDirectoryPage,
+  HospitalDirectoryPage,
+  PharmacyDirectoryPage,
+  AppointmentPage
+}

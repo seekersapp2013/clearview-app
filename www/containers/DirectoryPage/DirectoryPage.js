@@ -7,7 +7,7 @@ import ResultsList from '../../components/ResultsList'
 require('es6-promise').polyfill()
 const browserStorage = (typeof window.localStorage === 'undefined') ? null : window.localStorage
 
-class SearchPage extends React.Component {
+class DirectoryPage extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -150,7 +150,7 @@ class SearchPage extends React.Component {
   }
 }
 
-SearchPage.propTypes = {
+DirectoryPage.propTypes = {
   title: React.PropTypes.string.isRequired,
   icon: React.PropTypes.string.isRequired,
   searchInstructions: React.PropTypes.string.isRequired,
@@ -162,7 +162,7 @@ SearchPage.propTypes = {
   localStorageKey: React.PropTypes.string.isRequired
 }
 
-SearchPage.defaultProps = {
+DirectoryPage.defaultProps = {
   title: '',
   icon: '',
   searchInstructions: '',
@@ -174,4 +174,4 @@ SearchPage.defaultProps = {
   localStorageKey: ''
 }
 
-export default SearchPage
+export default DirectoryPage
