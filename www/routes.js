@@ -1,5 +1,5 @@
 import App from './containers/App'
-import {HomePage, DoctorPage, HospitalPage, PharmacyPage} from './containers/Pages'
+import {HomePage, DoctorPage, HospitalPage, PharmacyPage} from './containers/LandingPages'
 export default([
   {
     path: '/',
