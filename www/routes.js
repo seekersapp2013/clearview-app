@@ -1,5 +1,5 @@
 import App from './containers/App'
-import {HomePage, DoctorPage, HospitalPage, PharmacyPage} from './containers/LandingPages'
+import {HomePage, DoctorPage, HospitalPage, PharmacyPage, AppointmentPage} from './containers/LandingPages'
 export default([
   {
     path: '/',
@@ -10,5 +10,9 @@ export default([
       {path: '/hospitals', component: HospitalPage},
       {path: '/pharmacies', component: PharmacyPage}
     ]
+  },
+  {
+    path: '/appointment',
+    component: AppointmentPage
   }
 ])

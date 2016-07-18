@@ -107,4 +107,14 @@ class PharmacyPage extends React.Component {
   }
 }
 
-export {HomePage, DoctorPage, HospitalPage, PharmacyPage}
+class AppointmentPage extends React.Component {
+  render () {
+    return (
+      <div className="AppointmentPage">
+        <h1>Appointments</h1>
+      </div>
+    )
+  }
+}
+
+export {HomePage, DoctorPage, HospitalPage, PharmacyPage, AppointmentPage}
