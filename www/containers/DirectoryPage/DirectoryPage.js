@@ -2,7 +2,9 @@ import React from 'react'
 import BackLink from '../../components/BackLink'
 import Axios from 'axios'
 import DebouncedInput from 'react-debounce-input'
-import ResultsList from '../../components/ResultsList'
+import DirectoryList from '../../components/DirectoryList'
+import './DirectoryPage.styl'
+
 require('es6-promise').polyfill()
 
 const browserStorage = (typeof window.localStorage === 'undefined')
@@ -139,8 +141,9 @@ class DirectoryPage extends React.Component {
 
   renderItem ({index, isScrolling}) {
     let item = this.state.items[index]
+    console.log(index)
     return (
-      this.props.itemRenderer(item)
+      this.props.itemRenderer(item, index)
     )
   }
 
@@ -157,22 +160,21 @@ class DirectoryPage extends React.Component {
             autoCorrect="off"
             autoCapitalize="off"
             spellCheck="false"
+            className="FilterInput"
           />
         </div>
         <div>{this.props.title}</div>
-        <div className="Results__container">
-          <ResultsList
-            items={this.state.itemsShown}
-            itemHeight={20}
-            width={document.documentElement.clientWidth}
-            height={document.documentElement.clientHeight - 100}
-            rowCount={this.state.items.length}
-            rowHeight={20}
-            itemRenderer={this.props.itemRenderer}
-            title={this.props.title}
-            initialCount={this.state.itemsShown.length}
-          />
-        </div>
+        <DirectoryList
+          items={this.state.itemsShown}
+          itemHeight={this.props.itemHeight}
+          width={document.documentElement.clientWidth}
+          height={document.documentElement.clientHeight - 100}
+          rowCount={this.state.items.length}
+          rowHeight={this.props.rowHeight}
+          itemRenderer={this.props.itemRenderer}
+          title={this.props.title}
+          initialCount={this.state.itemsShown.length}
+        />
       </div>
     )
   }
@@ -185,6 +187,8 @@ DirectoryPage.propTypes = {
   itemType: React.PropTypes.string.isRequired,
   itemTypePlural: React.PropTypes.string.isRequired,
   itemRenderer: React.PropTypes.func.isRequired,
+  itemHeight: React.PropTypes.number.isRequired,
+  rowHeight: React.PropTypes.number.isRequired,
   getAllItemsUrl: React.PropTypes.string.isRequired,
   searchItemsUrl: React.PropTypes.string.isRequired,
   localStorageKey: React.PropTypes.string.isRequired,
@@ -198,6 +202,8 @@ DirectoryPage.defaultProps = {
   itemType: '',
   itemTypePlural: '',
   itemRenderer: null,
+  itemHeight: 0,
+  rowHeight: 0,
   getAllItemsUrl: '',
   searchItemsUrl: '',
   localStorageKey: '',

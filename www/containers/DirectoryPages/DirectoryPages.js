@@ -12,15 +12,38 @@ const API_URLS = {
 }
 
 class DoctorDirectoryPage extends React.Component {
-  itemRenderer (doctor) {
-    let itemLink = '#/doctors/' + encodeURIComponent(JSON.stringify(doctor))
+  itemRenderer (doctor, index) {
+    const itemLink = '#/doctors/' + encodeURIComponent(JSON.stringify(doctor))
+    const doctorName = doctor.LastName + ', ' + doctor.FirstName
+
     return (
-      <div
-        className="Results__ListItem Results__ListItem--doctor"
-        key={doctor._id}>
-        <a href={itemLink}>
-          {doctor.LastName}, {doctor.FirstName}
-        </a>
+      <div className="DirectoryList__Item">
+        <div className="DirectoryList__Item--Name">{doctorName}</div>
+        <div className="DirectoryList__Item--Specialty">{doctor.Specialty}</div>
+        <div className="DirectoryList__Item--PracticeName">{doctor.PracticeName}</div>
+        <div className="DirectoryList__Item--PhoneNumber">{doctor.PhoneNumber}</div>
+        <div>
+          <ul className="DirectoryList__Item__Links">
+            <li>
+              <div>
+                <a
+                  className="DirectoryList__Item__Button DirectoryList__Item__Button--Call"
+                  href={'telprompt://' + doctor.PhoneNumber}>
+                  Call
+                </a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a
+                  className="DirectoryList__Item__Button DirectoryList__Item__Button--MoreInfo"
+                  href={itemLink}>
+                  More Info
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     )
   }
@@ -33,6 +56,8 @@ class DoctorDirectoryPage extends React.Component {
         itemType="Doctor"
         itemTypePlural="Doctors"
         itemRenderer={::this.itemRenderer}
+        itemHeight={150}
+        rowHeight={150}
         getAllItemsUrl={API_URLS.doctors}
         searchItemsUrl={API_URLS.doctorsSearch}
         localStorageKey="doctors"
@@ -46,7 +71,7 @@ class HospitalDirectoryPage extends React.Component {
     let itemLink = '#/hospitals/' + encodeURIComponent(JSON.stringify(hospital))
     return (
       <div
-        className="Results__ListItem Results__ListItem--hospital"
+        className="DirectoryList__Item DirectoryList__Item--hospital"
         key={hospital._id}>
         <a href={itemLink}>
           {hospital.Name} {hospital.City}
@@ -63,6 +88,8 @@ class HospitalDirectoryPage extends React.Component {
         itemType="Hospital"
         itemTypePlural="Hospitals"
         itemRenderer={::this.itemRenderer}
+        itemHeight={150}
+        rowHeight={150}
         getAllItemsUrl={API_URLS.hospitals}
         searchItemsUrl={API_URLS.hospitalsSearch}
         localStorageKey="hospitals"
@@ -74,7 +101,7 @@ class HospitalDirectoryPage extends React.Component {
 class IndividualHospitalDirectoryPage extends React.Component {
   renderItem (item) {
     return (
-      <div>
+      <div className="DirectoryList__Item DirectoryList__Item--hospital">
         {item.Name}
         {item.City}
         {item.State}
@@ -93,6 +120,8 @@ class IndividualHospitalDirectoryPage extends React.Component {
         itemType="Contact"
         itemTypePlural="Contacts"
         itemRenderer={::this.renderItem}
+        itemHeight={150}
+        rowHeight={150}
         getAllItemsUrl="http://does.not.apply"
         searchItemsUrl="http://does.not.apply"
         localStorageKey="hospitals"
@@ -111,7 +140,7 @@ class PharmacyDirectoryPage extends React.Component {
     let itemLink = '#/pharmacies/' + encodeURIComponent(JSON.stringify(pharmacy))
     return (
       <div
-        className="Results__ListItem Results__ListItem--hospital"
+        className="DirectoryList__Item DirectoryList__Item--pharmacy"
         key={pharmacy._id}>
         <a href={itemLink}>
           {pharmacy.Name} {pharmacy.City}
@@ -128,6 +157,8 @@ class PharmacyDirectoryPage extends React.Component {
         itemType="Pharmacy"
         itemTypePlural="Pharmacies"
         itemRenderer={::this.itemRenderer}
+        itemHeight={150}
+        rowHeight={150}
         getAllItemsUrl={API_URLS.pharmacies}
         searchItemsUrl={API_URLS.pharmaciesSearch}
         localStorageKey="pharmacies"

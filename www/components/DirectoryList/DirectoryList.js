@@ -1,8 +1,9 @@
 import React from 'react'
 import { VirtualScroll } from 'react-virtualized'
 import 'react-virtualized/styles.css'
+import './DirectoryList.styl'
 
-class ResultsList extends React.Component {
+class DirectoryList extends React.Component {
 
   renderItem ({index, isScrolling}) {
     let item = this.props.items[index]
@@ -13,7 +14,7 @@ class ResultsList extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="DirectoryList DirectoryList__container">
         <VirtualScroll
           items={this.props.items}
           itemHeight={this.props.itemHeight}
@@ -28,10 +29,10 @@ class ResultsList extends React.Component {
   }
 }
 
-ResultsList.propTypes = {
+DirectoryList.propTypes = {
   items: React.PropTypes.array,
   itemRenderer: React.PropTypes.func.isRequired,
   itemHeight: React.PropTypes.number.isRequired
 }
 
-export default ResultsList
+export default DirectoryList
