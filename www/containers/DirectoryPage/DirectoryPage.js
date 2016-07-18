@@ -139,21 +139,13 @@ class DirectoryPage extends React.Component {
     }
   }
 
-  renderItem ({index, isScrolling}) {
-    let item = this.state.items[index]
-    console.log(index)
-    return (
-      this.props.itemRenderer(item, index)
-    )
-  }
-
   render () {
     return (
       <div className="Page DirectoryPage">
         <BackLink to="/" text="Home" />
         <div>
           <DebouncedInput
-            debounceTimeout={300}
+            debounceTimeout={200}
             onChange={::this.handleSearchStringChange}
             type="text"
             placeholder={this.props.searchInstructions}

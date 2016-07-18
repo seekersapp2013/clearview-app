@@ -15,9 +15,16 @@ class DoctorDirectoryPage extends React.Component {
   itemRenderer (doctor, index) {
     const itemLink = '#/doctors/' + encodeURIComponent(JSON.stringify(doctor))
     const doctorName = doctor.LastName + ', ' + doctor.FirstName
-
+    const evenColor = 'rgba(58,97,104,0.15)'
+    const oddColor = '#fffcf7'
+    const isOddNumberedItem = (index % 2 !== 0)
+    const backgroundColor = isOddNumberedItem
+      ? oddColor
+      : evenColor
     return (
-      <div className="DirectoryList__Item">
+      <div
+        className="DirectoryList__Item DirectoryList__Item--doctor"
+        style={{backgroundColor: backgroundColor}}>
         <div className="DirectoryList__Item--Name">{doctorName}</div>
         <div className="DirectoryList__Item--Specialty">{doctor.Specialty}</div>
         <div className="DirectoryList__Item--PracticeName">{doctor.PracticeName}</div>
@@ -56,8 +63,8 @@ class DoctorDirectoryPage extends React.Component {
         itemType="Doctor"
         itemTypePlural="Doctors"
         itemRenderer={::this.itemRenderer}
-        itemHeight={150}
-        rowHeight={150}
+        itemHeight={165}
+        rowHeight={165}
         getAllItemsUrl={API_URLS.doctors}
         searchItemsUrl={API_URLS.doctorsSearch}
         localStorageKey="doctors"

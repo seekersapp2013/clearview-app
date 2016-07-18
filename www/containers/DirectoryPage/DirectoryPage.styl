@@ -12,6 +12,8 @@
     color $green
     padding-left 20px
     text-align left
+    height: 100%;
+    width: 100%;
 
     &__Links
       list-style-type none
@@ -49,10 +51,8 @@
         font-family FontAwesome
         color $off-white
         padding-left 10px
-
-.Grid__cell:nth-child(odd)
-  background-color alpha($green, 15%)
-
+  &__Item--doctor
+    padding 20px
 .Grid__cell
   display flex
   flex-direction column

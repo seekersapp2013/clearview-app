@@ -7,7 +7,7 @@ class DirectoryList extends React.Component {
   renderItem ({index, isScrolling}) {
     let item = this.props.items[index]
     return (
-      this.props.itemRenderer(item)
+      this.props.itemRenderer(item, index)
     )
   }
 
