@@ -84,9 +84,10 @@ class IndividualHospitalDirectoryPage extends React.Component {
 
   render () {
     const item = JSON.parse(decodeURIComponent(this.props.params.item))
+    let title = item.Name + ' Phone Directory'
     return (
       <DirectoryPage
-        title="{item.Name} Phone Directory"
+        title={title}
         icon="a"
         searchInstructions="Search By Room/Office Name"
         itemType="Contact"

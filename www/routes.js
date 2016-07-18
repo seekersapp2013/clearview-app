@@ -23,6 +23,7 @@ export default([
       {path: '/doctors/:item', component: DoctorDetailPage},
       {path: '/hospitals', component: HospitalDirectoryPage},
       {path: '/hospitals/:item', component: IndividualHospitalDirectoryPage},
+      {path: '/hospitals/detail/:item', component: HospitalDetailPage},
       {path: '/pharmacies', component: PharmacyDirectoryPage},
       {path: '/pharmacies/:item', component: PharmacyDetailPage}
     ]
