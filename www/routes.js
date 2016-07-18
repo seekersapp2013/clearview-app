@@ -1,18 +1,14 @@
 import App from './containers/App'
-import HomePage from './containers/HomePage'
-import DoctorSearchPage from './containers/DoctorSearchPage'
-import HospitalSearchPage from './containers/HospitalSearchPage'
-import PharmacySearchPage from './containers/PharmacySearchPage'
-
+import {HomePage, DoctorPage, HospitalPage, PharmacyPage} from './containers/Pages'
 export default([
   {
     path: '/',
     component: App,
     indexRoute: {component: HomePage},
     childRoutes: [
-      {path: '/doctors', component: DoctorSearchPage},
-      {path: '/hospitals', component: HospitalSearchPage},
-      {path: '/pharmacies', component: PharmacySearchPage}
+      {path: '/doctors', component: DoctorPage},
+      {path: '/hospitals', component: HospitalPage},
+      {path: '/pharmacies', component: PharmacyPage}
     ]
   }
 ])
