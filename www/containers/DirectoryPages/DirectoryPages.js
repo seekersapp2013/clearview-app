@@ -1,5 +1,4 @@
 import React from 'react'
-import {Link} from 'react-router'
 import DirectoryPage from '../../containers/DirectoryPage'
 
 const API_ROOT = 'http://clearviewcancer.com:3000'
@@ -10,20 +9,6 @@ const API_URLS = {
   hospitalsSearch: API_ROOT + '/hospitals/search/',
   pharmacies: API_ROOT + '/pharmacies/',
   pharmaciesSearch: API_ROOT + '/pharmacies/search/'
-}
-
-class HomePage extends React.Component {
-  render () {
-    return (
-      <div className="page HomePage">
-        <nav>
-          <Link to="/doctors">Doctors</Link>
-          <Link to="/hospitals">Hospitals</Link>
-          <Link to="/pharmacies">Pharmacies</Link>
-        </nav>
-      </div>
-    )
-  }
 }
 
 class DoctorDirectoryPage extends React.Component {
@@ -108,7 +93,6 @@ class PharmacyDirectoryPage extends React.Component {
 }
 
 export {
-  HomePage,
   DoctorDirectoryPage,
   HospitalDirectoryPage,
   PharmacyDirectoryPage
