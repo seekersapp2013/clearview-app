@@ -4,6 +4,7 @@ import AppointmentPage from './containers/AppointmentPage'
 import {
   DoctorDirectoryPage,
   HospitalDirectoryPage,
+  IndividualHospitalDirectoryPage,
   PharmacyDirectoryPage
 } from './containers/DirectoryPages'
 import {
@@ -21,7 +22,7 @@ export default([
       {path: '/doctors', component: DoctorDirectoryPage},
       {path: '/doctors/:item', component: DoctorDetailPage},
       {path: '/hospitals', component: HospitalDirectoryPage},
-      {path: '/hospitals/:item', component: HospitalDetailPage},
+      {path: '/hospitals/:item', component: IndividualHospitalDirectoryPage},
       {path: '/pharmacies', component: PharmacyDirectoryPage},
       {path: '/pharmacies/:item', component: PharmacyDetailPage}
     ]

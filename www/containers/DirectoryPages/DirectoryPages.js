@@ -71,6 +71,40 @@ class HospitalDirectoryPage extends React.Component {
   }
 }
 
+class IndividualHospitalDirectoryPage extends React.Component {
+  renderItem (item) {
+    return (
+      <div>
+        {item.Name}
+        {item.City}
+        {item.State}
+      </div>
+    )
+  }
+
+  render () {
+    const item = JSON.parse(decodeURIComponent(this.props.params.item))
+    return (
+      <DirectoryPage
+        title="{item.Name} Phone Directory"
+        icon="a"
+        searchInstructions="Search By Room/Office Name"
+        itemType="Contact"
+        itemTypePlural="Contacts"
+        itemRenderer={::this.renderItem}
+        getAllItemsUrl="http://does.not.apply"
+        searchItemsUrl="http://does.not.apply"
+        localStorageKey="hospitals"
+        items={item.Directory}
+      />
+    )
+  }
+}
+
+IndividualHospitalDirectoryPage.propTypes = {
+  params: React.PropTypes.object.isRequired
+}
+
 class PharmacyDirectoryPage extends React.Component {
   itemRenderer (pharmacy) {
     let itemLink = '#/pharmacies/' + encodeURIComponent(JSON.stringify(pharmacy))
@@ -104,5 +138,6 @@ class PharmacyDirectoryPage extends React.Component {
 export {
   DoctorDirectoryPage,
   HospitalDirectoryPage,
+  IndividualHospitalDirectoryPage,
   PharmacyDirectoryPage
 }
