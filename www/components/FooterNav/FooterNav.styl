@@ -1,0 +1,43 @@
+@require('../../assets/styles/vars.styl')
+@require('../../assets/styles/font-awesome.css')
+
+.FooterNav
+  position fixed
+  height $footer-nav-height
+  line-height $footer-nav-height
+  width 100%
+  bottom 0
+  left 0
+
+  &__Link
+    font-family Lato
+    font-size 14px
+    font-weight bold
+
+    &__Item
+      background-color $tan;
+      border-top 3px solid $light-brown;
+      box-sizing border-box;
+      color $green;
+      display inline-block;
+      position relative;
+      text-align center;
+      width 50%;
+
+      & i
+        padding-right 10px
+
+    &--Active &__Item
+      border-top 3px solid $brown
+      color $brown
+
+      &::before
+        content '\f0d7'
+        font-family 'FontAwesome'
+        font-size 20px
+        height 20px
+        left 50%
+        line-height 20px
+        margin-top -8px
+        position absolute
+        top 0
