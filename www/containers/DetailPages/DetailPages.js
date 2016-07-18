@@ -18,15 +18,15 @@ class DoctorDetailPage extends React.Component {
             <button>Map</button>
           </div>
         </div>
-        <div className="DetailItem__PhoneNumbers">
-          <div className="DetailItem__PhoneNumber--main">
+        <div>
+          <div className="DetailItem__PhoneNumber DetailItem__PhoneNumber--main">
             <h3>Phone</h3>
             {item.PhoneNumber}
             <div>
               <button>Call</button>
             </div>
           </div>
-          <div className="DetailItem__PhoneNumber--fax">
+          <div className="DetailItem__PhoneNumber DetailItem__PhoneNumber--fax">
             <h3>Fax</h3>
             {item.FaxNumber}
           </div>
@@ -34,22 +34,11 @@ class DoctorDetailPage extends React.Component {
       </div>
     )
   }
+
   renderTitle (item) {
     const title = item.FirstName + ' ' + item.LastName
     return (title)
   }
-  // "_id": "5785328e238e242e723bb0f1",
-  // "LastName": "Aaron",
-  // "FirstName": "Ryan C.",
-  // "PhoneNumber": "256-533-1600",
-  // "FaxNumber": "256-534-8870",
-  // "PracticeName": "Spine & Neuro Center",
-  // "Specialty": "Physical Medicine & Rehabilitation",
-  // "Address": "201 Governors Drive 1st Floor",
-  // "City": "Huntsville",
-  // "State": "AL",
-  // "Zip": "35801",
-  // "County": "Madison"
 
   render () {
     const decodedItem = JSON.parse(decodeURIComponent(this.props.params.item))
@@ -60,7 +49,7 @@ class DoctorDetailPage extends React.Component {
         title={title}
         directoryLink="/doctors"
         item={item}
-        iconClassName="DetailItem__Icon--doctors"
+        iconClassName="DetailItem__Icon--doctor"
       />
     )
   }
@@ -69,20 +58,24 @@ class DoctorDetailPage extends React.Component {
 class HospitalDetailPage extends React.Component {
   renderItem (item) {
     return (
-      <div>
+      <div key={item._id} className="DetailItem DetailItem--hospital">
         <div>{item.PhoneNumber}</div>
         <div>{item.PhoneNumber2}</div>
         <div>{item.PhoneNumber3}</div>
       </div>
     )
   }
+
   render () {
-    const item = this.renderItem(JSON.parse(decodeURIComponent(this.props.params.item)))
+    const decodedItem = JSON.parse(decodeURIComponent(this.props.params.item))
+    const item = this.renderItem(decodedItem)
+    const title = decodedItem.Name
     return (
       <DetailPage
-        title="Hospital Detail Page"
-        directoryLink="/hospitals"
         item={item}
+        title={title}
+        directoryLink="/pharmacies"
+        iconClassName="DetailItem__Icon--hospital"
       />
     )
   }
@@ -91,21 +84,39 @@ class HospitalDetailPage extends React.Component {
 class PharmacyDetailPage extends React.Component {
   renderItem (item) {
     return (
-      <div>
-        {item.Name}
-        {item.City}
-        {item.State}
+      <div key={item._id} className="DetailItem DetailItem--pharmacy">
+        <div className="DetailItem__Address">
+          <div>{item.Address}</div>
+          <div>{item.City}, {item.State} {item.Zip}</div>
+          <button>Map</button>
+        </div>
+        <div>
+          <div className="DetailItem__PhoneNumber DetailItem__PhoneNumber--main">
+            <h3>Phone</h3>
+            {item.PhoneNumber}
+            <div>
+              <button>Call</button>
+            </div>
+          </div>
+          <div className="DetailItem__PhoneNumber DetailItem__PhoneNumber--fax">
+            <h3>Fax</h3>
+            {item.FaxNumber}
+          </div>
+        </div>
       </div>
     )
   }
 
   render () {
-    const item = this.renderItem(JSON.parse(decodeURIComponent(this.props.params.item)))
+    const decodedItem = JSON.parse(decodeURIComponent(this.props.params.item))
+    const item = this.renderItem(decodedItem)
+    const title = decodedItem.Name
     return (
       <DetailPage
-        title="Pharmacy Detail Page"
-        directoryLink="/pharmacies"
         item={item}
+        title={title}
+        directoryLink="/pharmacies"
+        iconClassName="DetailItem__Icon--pharmacy"
       />
     )
   }
