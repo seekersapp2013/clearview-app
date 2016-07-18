@@ -1,7 +1,6 @@
 import React from 'react'
 import { VirtualScroll } from 'react-virtualized'
 import 'react-virtualized/styles.css'
-import './DirectoryList.styl'
 
 class DirectoryList extends React.Component {
 
