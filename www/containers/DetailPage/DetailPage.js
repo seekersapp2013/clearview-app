@@ -2,11 +2,6 @@ import React from 'react'
 import { Link } from 'react-router'
 
 class DetailPage extends React.Component {
-  componentWillMount () {
-    this.setState({
-      item: decodeURIComponent(this.props.item)
-    })
-  }
   render () {
     return (
       <div>

@@ -1,12 +1,13 @@
 import React from 'react'
 import DetailPage from '../DetailPage'
+import DirectoryPage from '../DirectoryPage'
 
 class DoctorDetailPage extends React.Component {
   renderItem (item) {
     return (
       <div>
-        {item.LastName}, {item.FirstName}
-        {item.PracticeName}
+        <div>{item.LastName}, {item.FirstName}</div>
+        <div>{item.PracticeName}</div>
       </div>
     )
   }
@@ -35,12 +36,19 @@ class HospitalDetailPage extends React.Component {
   }
 
   render () {
-    const item = this.renderItem(JSON.parse(decodeURIComponent(this.props.params.item)))
+    const item = JSON.parse(decodeURIComponent(this.props.params.item))
     return (
-      <DetailPage
-        title="Hospital Detail Page"
-        directoryLink="/hospitals"
-        item={item}
+      <DirectoryPage
+        title="{item.Name} Phone Directory"
+        icon="a"
+        searchInstructions="Search By Name or Room Name"
+        itemType="Contact"
+        itemTypePlural="Contacts"
+        itemRenderer={::this.renderItem}
+        getAllItemsUrl="http://does.not.apply"
+        searchItemsUrl="http://does.not.apply"
+        localStorageKey="hospitals"
+        items={item.Directory}
       />
     )
   }

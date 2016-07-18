@@ -23,49 +23,62 @@ class DirectoryPage extends React.Component {
   }
 
   getAllItems () {
-    let page = this
-    let getItems = new Promise((resolve, reject) => {
-      Axios.get(page.props.getAllItemsUrl)
-        .then(function (response) {
-          resolve(response.data.message)
-        })
-        .catch(function (error) {
-          let items = JSON.parse(browserStorage.getItem(page.props.localStorageKey))
-          if (browserStorage !== null && items && items.length > 0) {
-            page.setState({
-              loadedFromLocalStorage: true
-            }, resolve(items))
-          } else {
-            reject(error)
+    if (this.props.items && this.props.items.length) {
+      this.setState({
+        items: this.props.items,
+        itemsShown: this.props.items,
+        loadedFromLocalStorage: true,
+        loading: false
+      })
+    } else {
+      let page = this
+      let getItems = new Promise((resolve, reject) => {
+        Axios.get(page.props.getAllItemsUrl)
+          .then(function (response) {
+            resolve(response.data.message)
+          })
+          .catch(function (error) {
+            let items = JSON.parse(browserStorage.getItem(page.props.localStorageKey))
+            if (browserStorage !== null && items && items.length > 0) {
+              page.setState({
+                loadedFromLocalStorage: true
+              }, resolve(items))
+            } else {
+              reject(error)
+            }
+          })
+      })
+      Promise.all([getItems])
+        .then(function (returnedArrays) {
+          let items = returnedArrays[0]
+          let itemsString = JSON.stringify(items)
+          let shouldSaveToStorage = !page.state.loadedFromLocalStorage
+          page.setState({
+            items: items,
+            itemsShown: items,
+            loading: false
+          })
+          if (shouldSaveToStorage) {
+            browserStorage.setItem(page.props.localStorageKey, itemsString)
           }
         })
-    })
-
-    Promise.all([getItems])
-      .then(function (returnedArrays) {
-        let items = returnedArrays[0]
-        let itemsString = JSON.stringify(items)
-        let shouldSaveToStorage = !page.state.loadedFromLocalStorage
-        page.setState({
-          items: items,
-          itemsShown: items
+        .catch(function (error) {
+          console.log('You must have an internet connection.')
+          page.setState({
+            error: error
+          })
         })
-        if (shouldSaveToStorage) {
-          browserStorage.setItem(page.props.localStorageKey, itemsString)
-        }
-      })
-      .catch(function (error) {
-        console.log('You must have an internet connection.')
-        page.setState({
-          error: error
-        })
-      })
+    }
   }
 
   componentDidMount () {
     this.getAllItems()
+    let itemsShown = this.state.items
+    if (this.props.items && this.props.items.length > 0) {
+      itemsShown = this.props.items
+    }
     this.setState({
-      itemsShown: this.state.items
+      itemsShown: itemsShown
     })
   }
 
@@ -174,7 +187,8 @@ DirectoryPage.propTypes = {
   itemRenderer: React.PropTypes.func.isRequired,
   getAllItemsUrl: React.PropTypes.string.isRequired,
   searchItemsUrl: React.PropTypes.string.isRequired,
-  localStorageKey: React.PropTypes.string.isRequired
+  localStorageKey: React.PropTypes.string.isRequired,
+  items: React.PropTypes.array
 }
 
 DirectoryPage.defaultProps = {
@@ -186,7 +200,8 @@ DirectoryPage.defaultProps = {
   itemRenderer: null,
   getAllItemsUrl: '',
   searchItemsUrl: '',
-  localStorageKey: ''
+  localStorageKey: '',
+  items: []
 }
 
 export default DirectoryPage
