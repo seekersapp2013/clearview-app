@@ -18,9 +18,7 @@ class App extends React.Component {
         <main>
           {children}
         </main>
-        <footer>
-          <FooterNav />
-        </footer>
+        <FooterNav />
       </div>
     )
   }

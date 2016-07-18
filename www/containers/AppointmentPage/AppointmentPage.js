@@ -12,9 +12,7 @@ class AppointmentPage extends React.Component {
             <h1>Appointments</h1>
           </div>
         </main>
-        <footer>
-          <FooterNav />
-        </footer>
+        <FooterNav />
       </div>
     )
   }
