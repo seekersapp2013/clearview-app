@@ -145,11 +145,11 @@ class DirectoryPage extends React.Component {
 
   render () {
     const itemsShownCount = this.state.itemsShown.length
-    let itemIdentifier = (itemsShownCount > 1)
-      ? this.props.itemTypePlural.toLowerCase()
-      : this.props.itemType.toLowerCase()
+    let itemIdentifier = (itemsShownCount === 1)
+      ? this.props.itemType.toLowerCase()
+      : this.props.itemTypePlural.toLowerCase()
     let itemsCountText = itemsShownCount + ' ' + itemIdentifier + ' found.'
-    if (itemsShownCount === 0) itemsCountText = 'No ' + this.props.itemTypePlural.toLowerCase() + ' found matching your search.'
+    if (this.state.loading) itemsCountText = 'Loading...'
     return (
       <div className="Page DirectoryPage" onTouchStart={::this.blurFocus}>
         <header>
