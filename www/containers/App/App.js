@@ -4,17 +4,11 @@ import 'react-fastclick'
 import FooterNav from '../../components/FooterNav'
 
 class App extends React.Component {
-  blurFocus () {
-    document.activeElement.blur()
-  }
 
   render () {
     const { children } = this.props
     return (
-      <div
-        className="AppContainer"
-        onTouchStart={this.blurFocus}
-      >
+      <div className="AppContainer">
         <main>
           {children}
         </main>

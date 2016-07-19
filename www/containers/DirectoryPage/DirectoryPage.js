@@ -139,9 +139,13 @@ class DirectoryPage extends React.Component {
     }
   }
 
+  blurFocus () {
+    document.activeElement.blur()
+  }
+
   render () {
     return (
-      <div className="Page DirectoryPage">
+      <div className="Page DirectoryPage" onTouchStart={::this.blurFocus}>
         <BackLink to="/" text="Home" />
         <div>
           <DebouncedInput
