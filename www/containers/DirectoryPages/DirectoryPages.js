@@ -1,5 +1,8 @@
 import React from 'react'
 import DirectoryPage from '../../containers/DirectoryPage'
+import DoctorListItem from '../../components/DoctorListItem'
+import HospitalListItem from '../../components/HospitalListItem'
+import PharmacyListItem from '../../components/PharmacyListItem'
 
 const API_ROOT = 'http://clearviewcancer.com:3000'
 const API_URLS = {
@@ -13,40 +16,8 @@ const API_URLS = {
 
 class DoctorDirectoryPage extends React.Component {
   itemRenderer (doctor, index) {
-    const itemLink = '#/doctors/' + encodeURIComponent(JSON.stringify(doctor))
-    const doctorName = doctor.LastName + ', ' + doctor.FirstName
-    const evenColor = 'rgba(58,97,104,0.15)'
-    const oddColor = '#fffcf7'
-    const backgroundColor = (index % 2 !== 0)
-      ? oddColor
-      : evenColor
-    let practiceNameStyles = {}
-    if (doctor.PracticeName.length >= 49) practiceNameStyles = {fontSize: 10}
     return (
-      <div
-        className="DirectoryList__ItemContainer DirectoryList__ItemContainer--doctor"
-        style={{backgroundColor: backgroundColor}}>
-        <div className="DirectoryList__Item DirectoryList__Item--Name">{doctorName}</div>
-        <div className="DirectoryList__Item DirectoryList__Item--Specialty">{doctor.Specialty}</div>
-        <div className="DirectoryList__Item DirectoryList__Item--PracticeName" style={practiceNameStyles}>{doctor.PracticeName}</div>
-        <div className="DirectoryList__Item DirectoryList__Item--PhoneNumber">{doctor.PhoneNumber}</div>
-        <div className="DirectoryList__Item DirectoryList__Item__Links">
-          <div>
-            <a
-              className="DirectoryList__Item__Button DirectoryList__Item__Button--Call"
-              href={'telprompt://' + doctor.PhoneNumber}>
-              Call
-            </a>
-          </div>
-          <div>
-            <a
-              className="DirectoryList__Item__Button DirectoryList__Item__Button--MoreInfo"
-              href={itemLink}>
-              More Info
-            </a>
-          </div>
-        </div>
-      </div>
+      <DoctorListItem doctor={doctor} index={index} />
     )
   }
   render () {
@@ -69,16 +40,9 @@ class DoctorDirectoryPage extends React.Component {
 }
 
 class HospitalDirectoryPage extends React.Component {
-  itemRenderer (hospital) {
-    let itemLink = '#/hospitals/' + encodeURIComponent(JSON.stringify(hospital))
+  itemRenderer (hospital, index) {
     return (
-      <div
-        className="DirectoryList__Item DirectoryList__Item--hospital"
-        key={hospital._id}>
-        <a href={itemLink}>
-          {hospital.Name} {hospital.City}
-        </a>
-      </div>
+      <HospitalListItem hospital={hospital} index={index} />
     )
   }
   render () {
@@ -90,11 +54,36 @@ class HospitalDirectoryPage extends React.Component {
         itemType="Hospital"
         itemTypePlural="Hospitals"
         itemRenderer={::this.itemRenderer}
-        itemHeight={150}
-        rowHeight={150}
+        itemHeight={165}
+        rowHeight={165}
         getAllItemsUrl={API_URLS.hospitals}
         searchItemsUrl={API_URLS.hospitalsSearch}
         localStorageKey="hospitals"
+      />
+    )
+  }
+}
+
+class PharmacyDirectoryPage extends React.Component {
+  itemRenderer (pharmacy, index) {
+    return (
+      <PharmacyListItem pharmacy={pharmacy} index={index} />
+    )
+  }
+  render () {
+    return (
+      <DirectoryPage
+        title="Pharmacies"
+        icon="c"
+        searchInstructions="Search by Name or Location"
+        itemType="Pharmacy"
+        itemTypePlural="Pharmacies"
+        itemRenderer={::this.itemRenderer}
+        itemHeight={165}
+        rowHeight={165}
+        getAllItemsUrl={API_URLS.pharmacies}
+        searchItemsUrl={API_URLS.pharmaciesSearch}
+        localStorageKey="pharmacies"
       />
     )
   }
@@ -135,38 +124,6 @@ class IndividualHospitalDirectoryPage extends React.Component {
 
 IndividualHospitalDirectoryPage.propTypes = {
   params: React.PropTypes.object.isRequired
-}
-
-class PharmacyDirectoryPage extends React.Component {
-  itemRenderer (pharmacy) {
-    let itemLink = '#/pharmacies/' + encodeURIComponent(JSON.stringify(pharmacy))
-    return (
-      <div
-        className="DirectoryList__Item DirectoryList__Item--pharmacy"
-        key={pharmacy._id}>
-        <a href={itemLink}>
-          {pharmacy.Name} {pharmacy.City}
-        </a>
-      </div>
-    )
-  }
-  render () {
-    return (
-      <DirectoryPage
-        title="Pharmacies"
-        icon="c"
-        searchInstructions="Search by Name or Location"
-        itemType="Pharmacy"
-        itemTypePlural="Pharmacies"
-        itemRenderer={::this.itemRenderer}
-        itemHeight={195}
-        rowHeight={195}
-        getAllItemsUrl={API_URLS.pharmacies}
-        searchItemsUrl={API_URLS.pharmaciesSearch}
-        localStorageKey="pharmacies"
-      />
-    )
-  }
 }
 
 export {
