@@ -20,35 +20,31 @@ class DoctorDirectoryPage extends React.Component {
     const backgroundColor = (index % 2 !== 0)
       ? oddColor
       : evenColor
+    let practiceNameStyles = {}
+    if (doctor.PracticeName.length >= 49) practiceNameStyles = {fontSize: 10}
     return (
       <div
-        className="DirectoryList__Item DirectoryList__Item--doctor"
+        className="DirectoryList__ItemContainer DirectoryList__ItemContainer--doctor"
         style={{backgroundColor: backgroundColor}}>
-        <div className="DirectoryList__Item--Name">{doctorName}</div>
-        <div className="DirectoryList__Item--Specialty">{doctor.Specialty}</div>
-        <div className="DirectoryList__Item--PracticeName">{doctor.PracticeName}</div>
-        <div className="DirectoryList__Item--PhoneNumber">{doctor.PhoneNumber}</div>
-        <div>
-          <ul className="DirectoryList__Item__Links">
-            <li>
-              <div>
-                <a
-                  className="DirectoryList__Item__Button DirectoryList__Item__Button--Call"
-                  href={'telprompt://' + doctor.PhoneNumber}>
-                  Call
-                </a>
-              </div>
-            </li>
-            <li>
-              <div>
-                <a
-                  className="DirectoryList__Item__Button DirectoryList__Item__Button--MoreInfo"
-                  href={itemLink}>
-                  More Info
-                </a>
-              </div>
-            </li>
-          </ul>
+        <div className="DirectoryList__Item DirectoryList__Item--Name">{doctorName}</div>
+        <div className="DirectoryList__Item DirectoryList__Item--Specialty">{doctor.Specialty}</div>
+        <div className="DirectoryList__Item DirectoryList__Item--PracticeName" style={practiceNameStyles}>{doctor.PracticeName}</div>
+        <div className="DirectoryList__Item DirectoryList__Item--PhoneNumber">{doctor.PhoneNumber}</div>
+        <div className="DirectoryList__Item DirectoryList__Item__Links">
+          <div>
+            <a
+              className="DirectoryList__Item__Button DirectoryList__Item__Button--Call"
+              href={'telprompt://' + doctor.PhoneNumber}>
+              Call
+            </a>
+          </div>
+          <div>
+            <a
+              className="DirectoryList__Item__Button DirectoryList__Item__Button--MoreInfo"
+              href={itemLink}>
+              More Info
+            </a>
+          </div>
         </div>
       </div>
     )
@@ -163,8 +159,8 @@ class PharmacyDirectoryPage extends React.Component {
         itemType="Pharmacy"
         itemTypePlural="Pharmacies"
         itemRenderer={::this.itemRenderer}
-        itemHeight={150}
-        rowHeight={150}
+        itemHeight={195}
+        rowHeight={195}
         getAllItemsUrl={API_URLS.pharmacies}
         searchItemsUrl={API_URLS.pharmaciesSearch}
         localStorageKey="pharmacies"
