@@ -1,0 +1,41 @@
+@require('../../assets/styles/vars.styl')
+
+.HomePage
+  padding 0 5%
+.menu
+  text-align center
+
+  &__link
+    text-decoration none
+    width 100%
+
+    &:active &__item
+      box-shadow none
+      -webkit-transform scale3d(.97, .97, 1)
+
+    &__item
+      background-color $green
+      border-radius 15px
+      box-shadow 0 4px 8px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19)
+      color $white
+      display table
+      height 20vh
+      margin-bottom 5vh
+      width 100%
+
+      &__container
+        display table-cell
+        text-align center
+        vertical-align middle
+
+      &__title
+        display inline-block
+        font-size 24px
+        vertical-align middle
+
+      &__icon
+        display inline-block
+        font-family 'clearview'
+        font-size 36px
+        margin-right 18px
+        vertical-align middle
