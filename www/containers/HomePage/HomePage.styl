@@ -2,40 +2,54 @@
 
 .HomePage
   padding 0 5%
-.menu
+
+.Menu
   text-align center
+  position absolute
+  top 50%
+  transform translateY(-50%)
+  width 90%
 
-  &__link
+  &__Link
     text-decoration none
-    width 100%
-
-    &:active &__item
+    &:active &Item__Container
       box-shadow none
       -webkit-transform scale3d(.97, .97, 1)
 
-    &__item
-      background-color $green
-      border-radius 15px
-      box-shadow 0 4px 8px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19)
-      color $white
-      display table
-      height 18vh
-      margin-bottom 2vh
-      width 100%
+  &__LinkItem__Container
+    background-color $green
+    border-radius 15px
+    box-shadow 0 4px 8px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19)
+    color $white
+    display table
+    height 18vh
+    margin-bottom 2vh
+    width 100%
+    display flex
+    flex-direction column
+    justify-content center
 
-      &__container
-        display table-cell
-        text-align center
-        vertical-align middle
+  &__LinkItem
+    display table-cell
+    text-align center
+    vertical-align middle
 
-      &__title
-        display inline-block
-        font-size 24px
-        vertical-align middle
+    &__Icon
+      display inline-block
+      font-family 'clearview'
+      font-size 36px
+      margin-right 18px
+      vertical-align middle
+      &:before
+        font-family clearview
+      &--Doctor:before
+        content: 'a'
+      &--Hospital:before
+        content: 'b'
+      &--Pharmacy:before
+        content: 'c'
 
-      &__icon
-        display inline-block
-        font-family 'clearview'
-        font-size 36px
-        margin-right 18px
-        vertical-align middle
+    &__Title
+      display inline-block
+      font-size 24px
+      vertical-align middle

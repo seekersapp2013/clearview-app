@@ -4,7 +4,6 @@ import 'react-virtualized/styles.css'
 import './DirectoryList.styl'
 
 class DirectoryList extends React.Component {
-
   renderItem ({index, isScrolling}) {
     let item = this.props.items[index]
     return (

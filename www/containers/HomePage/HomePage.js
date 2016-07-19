@@ -3,8 +3,8 @@ import { Link } from 'react-router'
 import './HomePage.styl'
 
 class HomePage extends React.Component {
-  render () {
-    // bug in older versions of safari's web view makes viewport height change over time
+  renderLink (url, title) {
+    // a bug in older versions of safari's web view makes viewport height change over time
     // so we need to set the menu links height with javascript here. :(
     const menuItemHeight = document.documentElement.clientHeight * 0.18
     const menuItemMarginBottom = document.documentElement.clientHeight * 0.02
@@ -13,35 +13,32 @@ class HomePage extends React.Component {
       height: menuItemHeight
     }
     return (
-      <div className="Page HomePage">
-        <h1>I want to find a</h1>
-        <nav className="menu">
-          <Link to="/doctors" className="menu__link" activeClassName="menu__link--active">
-            <div className="menu__link__item menu__link__item--doctors" style={menuItemStyles}>
-              <div className="menu__link__item__container">
-                <div className="menu__link__item__icon">a</div>
-                <div className="menu__link__item__title">Doctor</div>
-              </div>
-            </div>
-          </Link>
+      <Link
+        to={url}
+        className="Menu__Link"
+        activeClassName="Menu__Link--Active">
+        <div className="Menu__LinkItem__Container" style={menuItemStyles}>
+          <div className="Menu__LinkItem">
+            <div className={'Menu__LinkItem__Icon Menu__LinkItem__Icon--' + title}></div>
+            <div className="Menu__LinkItem__Title">{title}</div>
+          </div>
+        </div>
+      </Link>
+    )
+  }
+  render () {
+    const pageHeight = document.documentElement.clientHeight - 50
+    const doctorLink = this.renderLink('/doctors', 'Doctor')
+    const hospitalLink = this.renderLink('/hospitals', 'Hospital')
+    const pharmacyLink = this.renderLink('/pharmacies', 'Pharmacy')
 
-          <Link to="/hospitals" className="menu__link" activeClassName="menu__link--active">
-            <div className="menu__link__item menu__link__item--hospitals" style={menuItemStyles}>
-              <div className="menu__link__item__container">
-                <div className="menu__link__item__icon">b</div>
-                <div className="menu__link__item__title">Hospital</div>
-              </div>
-            </div>
-          </Link>
-
-          <Link to="/pharmacies" className="menu__link" activeClassName="menu__link--active">
-            <div className="menu__link__item menu__link__item--pharmacies" style={menuItemStyles}>
-              <div className="menu__link__item__container">
-                <div className="menu__link__item__icon">c</div>
-                <div className="menu__link__item__title">Pharmacy</div>
-              </div>
-            </div>
-          </Link>
+    return (
+      <div className="Page HomePage" style={{height: pageHeight}}>
+        <nav className="Menu">
+          <h1>I want to find a</h1>
+          {doctorLink}
+          {pharmacyLink}
+          {hospitalLink}
         </nav>
       </div>
     )
