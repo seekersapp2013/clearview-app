@@ -3,6 +3,7 @@ import DetailPage from '../DetailPage'
 
 class DoctorDetailPage extends React.Component {
   renderItem (item) {
+    const errorReportLink = '#/error/' + encodeURIComponent(JSON.stringify(item))
     return (
       <div key={item._id} className="DetailItem DetailItem--doctor">
         <div className="DetailItem__Specialty">
@@ -30,6 +31,10 @@ class DoctorDetailPage extends React.Component {
             <h3>Fax</h3>
             {item.FaxNumber}
           </div>
+        </div>
+        <div className="DetailPage__UpdateRequestContainer">
+          <span>Information out of date?</span>
+          <a href={errorReportLink}>Request Update</a>
         </div>
       </div>
     )
