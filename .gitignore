@@ -20,4 +20,8 @@ platforms/*
 hooks/*
 plugins/*
 
+# Generated Icons from splashicon-generator
+res/*
+store/*
+
 hooks/README.md

@@ -7,7 +7,8 @@
     "start": "node server.js",
     "dev": "node dev-server.js",
     "build-ios": "webpack && cordova build ios && open platforms/ios/clearview-directory-app.xcodeproj",
-    "lint": "eslint ./www *.js"
+    "lint": "eslint ./www *.js",
+    "generate-icons": "splashicon-generator --imagespath=\"www/assets\""
   },
   "author": "Wesley Hall",
   "license": "MIT",

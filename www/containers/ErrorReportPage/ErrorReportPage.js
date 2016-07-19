@@ -5,8 +5,6 @@ import './ErrorReportPage.styl'
 
 class ErrorReportPage extends React.Component {
   render () {
-    const decodedItem = JSON.parse(decodeURIComponent(this.props.params.item))
-    const title = decodedItem.Name
     return (
       <div className="Page ErrorReportPage">
         <header>
