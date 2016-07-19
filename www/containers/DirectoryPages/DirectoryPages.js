@@ -17,8 +17,7 @@ class DoctorDirectoryPage extends React.Component {
     const doctorName = doctor.LastName + ', ' + doctor.FirstName
     const evenColor = 'rgba(58,97,104,0.15)'
     const oddColor = '#fffcf7'
-    const isOddNumberedItem = (index % 2 !== 0)
-    const backgroundColor = isOddNumberedItem
+    const backgroundColor = (index % 2 !== 0)
       ? oddColor
       : evenColor
     return (
