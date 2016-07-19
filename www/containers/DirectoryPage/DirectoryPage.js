@@ -144,22 +144,33 @@ class DirectoryPage extends React.Component {
   }
 
   render () {
+    const itemsShownCount = this.state.itemsShown.length
+    let itemIdentifier = (itemsShownCount > 1)
+      ? this.props.itemTypePlural.toLowerCase()
+      : this.props.itemType.toLowerCase()
+    let itemsCountText = itemsShownCount + ' ' + itemIdentifier + ' found.'
+    if (itemsShownCount === 0) itemsCountText = 'No ' + this.props.itemTypePlural.toLowerCase() + ' found matching your search.'
     return (
       <div className="Page DirectoryPage" onTouchStart={::this.blurFocus}>
-        <BackLink to="/" text="Home" />
-        <div>
-          <DebouncedInput
-            debounceTimeout={200}
-            onChange={::this.handleSearchStringChange}
-            type="text"
-            placeholder={this.props.searchInstructions}
-            autoCorrect="off"
-            autoCapitalize="off"
-            spellCheck="false"
-            className="FilterInput"
-          />
-        </div>
-        <div>{this.props.title}</div>
+        <header>
+          <BackLink to="/" text="Home" />
+          <h1>{this.props.title}</h1>
+          <div>
+            <DebouncedInput
+              debounceTimeout={200}
+              onChange={::this.handleSearchStringChange}
+              type="text"
+              placeholder={this.props.searchInstructions}
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              className="FilterInput"
+            />
+          </div>
+          <div className="DirectoryPage__ItemCount">
+            {itemsCountText}
+          </div>
+        </header>
         <DirectoryList
           items={this.state.itemsShown}
           itemHeight={this.props.itemHeight}

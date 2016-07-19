@@ -58,7 +58,7 @@ class DoctorDirectoryPage extends React.Component {
       <DirectoryPage
         title="Doctors"
         icon="a"
-        searchInstructions="Search by Name or Specialty"
+        searchInstructions="Search by Name, Specialty, or Practice"
         itemType="Doctor"
         itemTypePlural="Doctors"
         itemRenderer={::this.itemRenderer}

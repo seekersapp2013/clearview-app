@@ -12,13 +12,14 @@ class DirectoryList extends React.Component {
   }
 
   render () {
+    const headerAndFooterHeightCombined = 140 + 50
     return (
       <div className="DirectoryList DirectoryList__container">
         <VirtualScroll
           items={this.props.items}
           itemHeight={this.props.itemHeight}
           width={document.documentElement.clientWidth}
-          height={document.documentElement.clientHeight - 100}
+          height={document.documentElement.clientHeight - headerAndFooterHeightCombined}
           rowCount={this.props.items.length}
           rowHeight={this.props.itemHeight}
           rowRenderer={::this.renderItem}
