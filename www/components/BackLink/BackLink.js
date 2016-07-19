@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import './BackLink.styl'
 
 class BackLink extends React.Component {
   render () {
