@@ -1,0 +1,41 @@
+@require('../../assets/styles/vars.styl')
+.DoctorDetailPage
+  color $brown
+  padding-left 20px
+  div
+    text-align left
+  &__Specialty h3:before,
+  &__Address h3:before,
+  &__PhoneNumber h3:before,
+  &__FaxNumber h3:before
+    font-family FontAwesome
+    padding-right 7px
+    color $brown
+
+  &__Specialty h3:before
+    content '\f005'
+
+  &__Address h3:before
+    content '\f041'
+
+  &__PhoneNumber h3:before
+    content '\f095'
+
+  &__FaxNumber h3:before
+    content '\f1ac'
+
+  & .Button
+    margin-top 14px
+
+  &__UpdateRequestContainer
+    padding 14px 0
+    display block
+
+  &__UpdateRequestLink
+    font-size 13px
+    padding 4px
+    border 1px $green solid
+    color $green
+    border-radius 5px
+    margin-left 14px
+    text-decoration none
