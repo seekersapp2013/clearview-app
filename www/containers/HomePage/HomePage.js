@@ -37,8 +37,8 @@ class HomePage extends React.Component {
         <nav className="Menu">
           <h1>I want to find a</h1>
           {doctorLink}
-          {pharmacyLink}
           {hospitalLink}
+          {pharmacyLink}
         </nav>
       </div>
     )
