@@ -150,6 +150,11 @@ class DirectoryPage extends React.Component {
       : this.props.itemTypePlural.toLowerCase()
     let itemsCountText = itemsShownCount + ' ' + itemIdentifier + ' found.'
     if (this.state.loading) itemsCountText = 'Loading...'
+    const backLinkHeight = 30
+    const headerHeight = 140
+    const footerHeight = 50
+    const bottomPadding = 14
+    const remainingPage = document.documentElement.clientHeight - (backLinkHeight + headerHeight + footerHeight + bottomPadding)
     return (
       <div className={'Page DirectoryPage ' + this.props.itemType.toLowerCase()} onTouchStart={::this.blurFocus}>
         <header>
@@ -175,7 +180,7 @@ class DirectoryPage extends React.Component {
           items={this.state.itemsShown}
           itemHeight={this.props.itemHeight}
           width={document.documentElement.clientWidth - 20}
-          height={document.documentElement.clientHeight - 204}
+          height={remainingPage}
           rowCount={this.state.items.length}
           rowHeight={this.props.rowHeight}
           itemRenderer={this.props.itemRenderer}

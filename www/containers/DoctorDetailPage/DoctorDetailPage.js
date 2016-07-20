@@ -17,13 +17,13 @@ class DoctorDetailPage extends React.Component {
     const googleMapsLink = 'http://maps.google.com/?q=' + encodeURIComponent(addressString) + 't'
 
     return (
-      <div className="Page DetailPage">
+      <div className="Page DoctorDetailPage">
         <header>
           <BackLink to="/doctors" text="Back" />
           <div className="DoctorDetailPage__Icon"></div>
           <h1>{title}</h1>
         </header>
-        <div key={item._id} className="DoctorDetailPage">
+        <div key={item._id}>
           <div className="DoctorDetailPage__Specialty">
             <h3>Specialties</h3>
             <div>{item.Specialty}</div>

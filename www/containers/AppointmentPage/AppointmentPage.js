@@ -2,6 +2,7 @@ import React from 'react'
 import BackLink from '../../components/BackLink'
 import FooterNav from '../../components/FooterNav'
 import './AppointmentPage.styl'
+import '../App/App.styl'
 
 class AppointmentPage extends React.Component {
   componentDidMount () {
@@ -27,10 +28,10 @@ class AppointmentPage extends React.Component {
           </div>
           <div className="AppointmentPage__InputGroup">
             <label htmlFor="phone">My phone number</label>
-            <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" />
+            <input type="number" id="phone" name="phone" placeholder="(555) 555-5555" />
           </div>
           <div className="AppointmentPage__InputGroup">
-            <label htmlFor="phone">My email address</label>
+            <label htmlFor="email">My email address</label>
             <input type="email" id="email" name="email" placeholder="Enter your email address" />
           </div>
           <button>Submit</button>
