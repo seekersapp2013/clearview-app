@@ -3,6 +3,7 @@ import DirectoryPage from '../../containers/DirectoryPage'
 import DoctorListItem from '../../components/DoctorListItem'
 import HospitalListItem from '../../components/HospitalListItem'
 import PharmacyListItem from '../../components/PharmacyListItem'
+import HospitalDirectoryListItem from '../../components/HospitalDirectoryListItem'
 
 const API_ROOT = 'http://clearviewcancer.com:3000'
 const API_URLS = {
@@ -90,29 +91,25 @@ class PharmacyDirectoryPage extends React.Component {
 }
 
 class IndividualHospitalDirectoryPage extends React.Component {
-  renderItem (item) {
+  itemRenderer (contact, index) {
     return (
-      <div className="DirectoryList__Item DirectoryList__Item--hospital">
-        {item.Name}
-        {item.City}
-        {item.State}
-      </div>
+      <HospitalDirectoryListItem contact={contact} index={index} />
     )
   }
 
   render () {
     const item = JSON.parse(decodeURIComponent(this.props.params.item))
-    let title = item.Name + ' Phone Directory'
+    let title = item.Name + ' Directory'
     return (
       <DirectoryPage
         title={title}
         icon="a"
-        searchInstructions="Search By Room/Office Name"
+        searchInstructions="Search By Department / Office Name"
         itemType="Contact"
         itemTypePlural="Contacts"
-        itemRenderer={::this.renderItem}
-        itemHeight={150}
-        rowHeight={150}
+        itemRenderer={::this.itemRenderer}
+        itemHeight={155}
+        rowHeight={155}
         getAllItemsUrl="http://does.not.apply"
         searchItemsUrl="http://does.not.apply"
         localStorageKey="hospitals"
