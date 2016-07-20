@@ -151,7 +151,7 @@ class DirectoryPage extends React.Component {
     let itemsCountText = itemsShownCount + ' ' + itemIdentifier + ' found.'
     if (this.state.loading) itemsCountText = 'Loading...'
     return (
-      <div className="Page DirectoryPage" onTouchStart={::this.blurFocus}>
+      <div className={'Page DirectoryPage ' + this.props.itemType.toLowerCase()} onTouchStart={::this.blurFocus}>
         <header>
           <BackLink to="/" text="Home" />
           <h1>{this.props.title}</h1>
