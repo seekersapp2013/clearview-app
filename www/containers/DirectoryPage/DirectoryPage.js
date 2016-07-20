@@ -175,7 +175,7 @@ class DirectoryPage extends React.Component {
           items={this.state.itemsShown}
           itemHeight={this.props.itemHeight}
           width={document.documentElement.clientWidth - 20}
-          height={document.documentElement.clientHeight - 190}
+          height={document.documentElement.clientHeight - 204}
           rowCount={this.state.items.length}
           rowHeight={this.props.rowHeight}
           itemRenderer={this.props.itemRenderer}

@@ -17,6 +17,7 @@ class HospitalDirectoryListItem extends React.Component {
     const contactNumbers = this.state.contactNumbers.filter((number) => {
       return number !== ''
     })
+
     const phoneNumbers = contactNumbers.map((number, index) => {
       const lineNum = index + 1
       let lineNumText = ''
@@ -27,6 +28,7 @@ class HospitalDirectoryListItem extends React.Component {
         <div className="HospitalDirectoryListItem__PhoneNumber">{lineNumText}{number}</div>
       )
     })
+
     const callLinks = contactNumbers.map((number, index) => {
       const lineNum = index + 1
       let buttonText = 'Call'
