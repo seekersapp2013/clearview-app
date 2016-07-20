@@ -6,6 +6,8 @@ class PharmacyListItem extends React.Component {
   render () {
     const {pharmacy, index} = this.props
     let rowColor = getRowColor(index)
+    let addressString = pharmacy.Address + ' ' + pharmacy.City + ', ' + pharmacy.State + ' ' + pharmacy.Zip
+    let googleMapsLink = 'http://maps.google.com/?q=' + encodeURIComponent(addressString)
     return (
       <div className="PharmacyListItem__Container" style={{backgroundColor: rowColor}}>
         <div className="PharmacyListItem">
@@ -13,15 +15,31 @@ class PharmacyListItem extends React.Component {
           <div className="PharmacyListItem__Address">
             <div>{pharmacy.Address}</div>
             <div>{pharmacy.City} , {pharmacy.State}</div>
-            <div>Main Office: {pharmacy.PhoneNumber}</div>
+          </div>
+          <div className="PharmacyListItem__PhoneNumbers">
+            <div className="PharmacyListItem__PhoneNumber">
+              {pharmacy.PhoneNumber}
+            </div>
+            <div className="PharmacyListItem__FaxNumber">
+              {pharmacy.FaxNumber}
+            </div>
           </div>
           <div className="PharmacyListItem__Links">
-            <div className="PharmacyListItem__PhoneNumber">
+            <div>
               <a
                 className="Button Button--Call"
                 style={{textDecoration: 'none'}}
                 href={'telprompt://' + pharmacy.PhoneNumber}>
                 Call
+              </a>
+            </div>
+            <div>
+              <a
+                className="Button Button--Map"
+                style={{textDecoration: 'none'}}
+                href={googleMapsLink}
+                target="_blank">
+                Map
               </a>
             </div>
           </div>
