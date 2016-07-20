@@ -14,40 +14,45 @@ class HospitalDirectoryListItem extends React.Component {
   }
 
   render () {
-    const contactNumbers = this.state.contactNumbers.filter((number) => {
-      return number !== ''
+    const phoneNumbers = this.props.numbers.map((number, index) => {
+      if (number === '') {
+        return ('')
+      } else {
+        const lineNum = index + 1
+        let lineNumText = ''
+        if (this.props.numbers.length > 1) {
+          lineNumText = 'Line ' + lineNum + ': '
+        }
+        return (
+          <div key={'number' + index} className="HospitalDirectoryListItem__PhoneNumber">{lineNumText}{number}</div>
+        )
+      }
     })
 
-    const phoneNumbers = contactNumbers.map((number, index) => {
-      const lineNum = index + 1
-      let lineNumText = ''
-      if (contactNumbers.length > 1) {
-        lineNumText = 'Line ' + lineNum + ': '
+    const callLinks = this.props.numbers.map((number, index) => {
+      if (number === '') {
+        return ('')
+      } else {
+        const lineNum = index + 1
+        let buttonText = 'Call'
+        if (this.props.numbers.length > 1) {
+          buttonText = 'Line ' + lineNum
+        }
+        return (
+          <div key={'button' + index}>
+            <a
+              className="Button Button--Call"
+              href={'telprompt://' + number}>
+              {buttonText}
+            </a>
+          </div>
+        )
       }
-      return (
-        <div className="HospitalDirectoryListItem__PhoneNumber">{lineNumText}{number}</div>
-      )
-    })
-
-    const callLinks = contactNumbers.map((number, index) => {
-      const lineNum = index + 1
-      let buttonText = 'Call'
-      if (contactNumbers.length > 1) {
-        buttonText = 'Line ' + lineNum
-      }
-      return (
-        <div>
-          <a
-            className="Button Button--Call"
-            href={'telprompt://' + number}>
-            {buttonText}
-          </a>
-        </div>
-      )
     })
 
     return (
       <div
+        key={this.props.contact._id}
         className="HospitalDirectoryListItem__Container"
         style={{backgroundColor: this.state.rowColor}}>
         <div className="HospitalDirectoryListItem__Name">{this.props.contact.Name}</div>
@@ -64,7 +69,8 @@ class HospitalDirectoryListItem extends React.Component {
 
 HospitalDirectoryListItem.propTypes = {
   contact: React.PropTypes.object.isRequired,
-  index: React.PropTypes.number.isRequired
+  index: React.PropTypes.number.isRequired,
+  numbers: React.PropTypes.array.isRequired
 }
 
 export default HospitalDirectoryListItem

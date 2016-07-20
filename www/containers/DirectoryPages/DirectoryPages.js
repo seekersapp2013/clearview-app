@@ -92,8 +92,9 @@ class PharmacyDirectoryPage extends React.Component {
 
 class IndividualHospitalDirectoryPage extends React.Component {
   itemRenderer (contact, index) {
+    let contactNumbers = [contact.PhoneNumber, contact.PhoneNumber2, contact.PhoneNumber3]
     return (
-      <HospitalDirectoryListItem contact={contact} index={index} />
+      <HospitalDirectoryListItem contact={contact} index={index} numbers={contactNumbers} />
     )
   }
 
