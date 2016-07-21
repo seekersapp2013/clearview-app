@@ -1,7 +1,7 @@
 import React from 'react'
-import BackLink from '../../components/BackLink'
 import Axios from 'axios'
 import DebouncedInput from 'react-debounce-input'
+import BackLink from '../../components/BackLink'
 import DirectoryList from '../../components/DirectoryList'
 import './DirectoryPage.styl'
 
