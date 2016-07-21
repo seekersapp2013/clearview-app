@@ -7,7 +7,7 @@ class ErrorReportPage extends React.Component {
   render () {
     const footerHeight = 50
     const backLinkHeight = 30
-    const mainHeight = document.documentElement.clientHeight - (footerHeight)
+    const mainHeight = document.documentElement.clientHeight - (footerHeight + backLinkHeight)
 
     return (
       <div className="Page ErrorReportPage">
