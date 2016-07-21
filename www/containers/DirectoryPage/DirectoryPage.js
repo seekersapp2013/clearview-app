@@ -85,7 +85,7 @@ class DirectoryPage extends React.Component {
   }
 
   filterItemsWithAPI (searchString) {
-    let searchUrl = this.props.searchItemsUrl + searchString
+    let searchUrl = this.props.searchItemsUrl + encodeURIComponent(searchString)
     let getItems = new Promise((resolve, reject) => {
       Axios.get(searchUrl)
         .then(response => {
