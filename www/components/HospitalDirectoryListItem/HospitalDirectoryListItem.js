@@ -4,23 +4,32 @@ import './HospitalDirectoryListItem.styl'
 
 class HospitalDirectoryListItem extends React.Component {
 
-  componentWillMount () {
-    const {contact, index} = this.props
-    const rowColor = getRowColor(index)
-    this.setState({
-      rowColor: rowColor,
-      contactNumbers: [contact.PhoneNumber, contact.PhoneNumber2, contact.PhoneNumber3]
+  constructor (props) {
+    super(props)
+    this.state = {
+      rowColor: getRowColor(props.index),
+      contactNumbers: this.filterEmptyItems([props.contact.PhoneNumber, props.contact.PhoneNumber2, props.contact.PhoneNumber3])
+    }
+  }
+
+  filterEmptyItems (items) {
+    let filtered = []
+    items.map((item) => {
+      if (item !== '' && item !== 'undefined') {
+        filtered.push(item)
+      }
     })
+    return filtered
   }
 
   render () {
-    const phoneNumbers = this.props.numbers.map((number, index) => {
+    const phoneNumbers = this.state.contactNumbers.map((number, index) => {
       if (number === '') {
         return ('')
       } else {
         const lineNum = index + 1
         let lineNumText = ''
-        if (this.props.numbers.length > 1) {
+        if (this.state.contactNumbers.length > 1) {
           lineNumText = 'Line ' + lineNum + ': '
         }
         return (
@@ -29,13 +38,13 @@ class HospitalDirectoryListItem extends React.Component {
       }
     })
 
-    const callLinks = this.props.numbers.map((number, index) => {
+    const callLinks = this.state.contactNumbers.map((number, index) => {
       if (number === '') {
         return ('')
       } else {
         const lineNum = index + 1
         let buttonText = 'Call'
-        if (this.props.numbers.length > 1) {
+        if (this.state.contactNumbers.length > 1) {
           buttonText = 'Line ' + lineNum
         }
         return (
@@ -69,8 +78,7 @@ class HospitalDirectoryListItem extends React.Component {
 
 HospitalDirectoryListItem.propTypes = {
   contact: React.PropTypes.object.isRequired,
-  index: React.PropTypes.number.isRequired,
-  numbers: React.PropTypes.array.isRequired
+  index: React.PropTypes.number.isRequired
 }
 
 export default HospitalDirectoryListItem
