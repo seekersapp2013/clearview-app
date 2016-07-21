@@ -1,4 +1,5 @@
 import React from 'react'
+import BackLink from '../../components/BackLink'
 import DirectoryPage from '../../containers/DirectoryPage'
 import DoctorListItem from '../../components/DoctorListItem'
 import HospitalListItem from '../../components/HospitalListItem'
@@ -101,6 +102,7 @@ class IndividualHospitalDirectoryPage extends React.Component {
   render () {
     const item = JSON.parse(decodeURIComponent(this.props.params.item))
     let title = item.Name + ' Directory'
+    let backLink = <BackLink to="/hospitals" text="Back" />
     return (
       <DirectoryPage
         title={title}
@@ -115,6 +117,7 @@ class IndividualHospitalDirectoryPage extends React.Component {
         searchItemsUrl="http://does.not.apply"
         localStorageKey="hospitals"
         items={item.Directory}
+        backLink={backLink}
       />
     )
   }

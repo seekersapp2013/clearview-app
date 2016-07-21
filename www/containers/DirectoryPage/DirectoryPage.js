@@ -155,10 +155,14 @@ class DirectoryPage extends React.Component {
     const footerHeight = 50
     const bottomPadding = 14
     const remainingPage = document.documentElement.clientHeight - (backLinkHeight + headerHeight + footerHeight + bottomPadding)
+    let _BackLink = this.props.backLink
+      ? this.props.backLink
+      : <BackLink to="/" text="Home" />
+
     return (
       <div className={'Page DirectoryPage ' + this.props.itemType.toLowerCase()} onTouchStart={::this.blurFocus}>
         <header>
-          <BackLink to="/" text="Home" />
+          {_BackLink}
           <h1>{this.props.title}</h1>
           <div>
             <DebouncedInput
@@ -204,6 +208,7 @@ DirectoryPage.propTypes = {
   getAllItemsUrl: React.PropTypes.string.isRequired,
   searchItemsUrl: React.PropTypes.string.isRequired,
   localStorageKey: React.PropTypes.string.isRequired,
+  backLink: React.PropTypes.any,
   items: React.PropTypes.array
 }
 
