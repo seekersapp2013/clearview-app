@@ -14,7 +14,7 @@ class DoctorDetailPage extends React.Component {
     const title = this.renderTitle(item)
     const errorReportLink = '#/error/' + encodeURIComponent(JSON.stringify(item))
     const addressString = item.Address + ' ' + item.City + ', ' + item.State + ' ' + item.Zip
-    const googleMapsLink = 'http://maps.google.com/?q=' + encodeURIComponent(addressString) + 't'
+    const googleMapsLink = 'http://maps.google.com/?q=' + encodeURIComponent(addressString)
 
     return (
       <div className="Page DoctorDetailPage">
