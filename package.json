@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node dev-server.js",
-    "build-ios": "webpack && cordova build ios && open platforms/ios/clearview-directory-app.xcodeproj",
+    "build-ios": "webpack && cordova build ios && open 'platforms/ios/CCI Directory.xcodeproj'",
     "lint": "eslint ./www *.js",
     "generate-icons": "./node_modules/splashicon-generator/bin/splashicon-generator --imagespath=\"./www/assets\""
   },
