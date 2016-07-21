@@ -6,13 +6,13 @@ import './ErrorReportPage.styl'
 class ErrorReportPage extends React.Component {
   render () {
     const footerHeight = 50
-    const backLinkHeight = 30
-    const mainHeight = document.documentElement.clientHeight - (footerHeight + backLinkHeight)
+    const paddingBottom = 55
+    const mainHeight = document.documentElement.clientHeight - (footerHeight)
 
     return (
       <div className="Page ErrorReportPage">
-        <BackLink to="/" text="Back" />
-        <div style={{height: mainHeight, overflow: 'scroll', paddingBottom: 30}}>
+        <BackLink to="/doctors" text="Back" />
+        <div style={{height: mainHeight, overflow: 'scroll'}}>
           <header>
             <div className="ErrorReportPage__Icon"></div>
             <div className="ErrorReportPage__Instructions">
@@ -20,7 +20,7 @@ class ErrorReportPage extends React.Component {
               Leave your name, email address, and phone number and a representative will be in touch.
             </div>
           </header>
-          <main>
+          <main style={{paddingBottom: paddingBottom}}>
             <div className="ErrorReportPage__InputGroup">
               <label htmlFor="name">My name</label>
               <input type="text" id="name" name="name" placeholder="Enter your name" required="required" />
