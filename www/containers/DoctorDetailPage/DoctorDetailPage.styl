@@ -2,30 +2,25 @@
 .DoctorDetailPage
   color $brown
   padding-left 20px
-  padding-top: 35px
+  padding-top 35px
   .BackLink
     background-color $off-white
   div
     text-align left
   h1
     width 100%
-  &__Specialty h3:before,
-  &__Address h3:before,
-  &__PhoneNumber h3:before,
-  &__FaxNumber h3:before
+  h3
+    margin 16px 0 5px
+  h3:before
     font-family FontAwesome
     padding-right 7px
     color $brown
-
   &__Specialty h3:before
     content '\f005'
-
   &__Address h3:before
     content '\f041'
-
   &__PhoneNumber h3:before
     content '\f095'
-
   &__FaxNumber h3:before
     content '\f1ac'
 
@@ -35,7 +30,6 @@
   &__UpdateRequestContainer
     padding 14px 0
     display block
-
   &__UpdateRequestLink
     font-size 13px
     padding 4px

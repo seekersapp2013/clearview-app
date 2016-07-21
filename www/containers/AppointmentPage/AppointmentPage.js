@@ -7,7 +7,6 @@ import '../App/App.styl'
 class AppointmentPage extends React.Component {
   render () {
     const footerHeight = 50
-    const backLinkHeight = 30
     const mainHeight = document.documentElement.clientHeight - (footerHeight)
 
     return (
