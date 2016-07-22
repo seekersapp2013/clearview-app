@@ -12,9 +12,12 @@ class DoctorDetailPage extends React.Component {
   render () {
     const item = JSON.parse(decodeURIComponent(this.props.params.item))
     const title = this.renderTitle(item)
-    const errorReportLink = '#/error/' + encodeURIComponent(JSON.stringify(item))
     const addressString = item.Address + ' ' + item.City + ', ' + item.State + ' ' + item.Zip
+    const errorReportLink = '#/error/' + encodeURIComponent(JSON.stringify(item))
     const googleMapsLink = 'http://maps.google.com/?q=' + encodeURIComponent(addressString)
+    const telephoneLink = (userAgent.indexOf('android') > -1)
+      ? 'tel:' + item.PhoneNumber
+      : 'telprompt:' + item.PhoneNumber
 
     return (
       <div className="Page DoctorDetailPage">
@@ -42,7 +45,7 @@ class DoctorDetailPage extends React.Component {
               <h3>Phone</h3>
               {item.PhoneNumber}
               <div>
-                <a className="Button Button--Call" href={'telprompt://' + item.PhoneNumber}>Call</a>
+                <a className="Button Button--Call" href={telephoneLink}>Call</a>
               </div>
             </div>
             <div className="DoctorDetailPage__FaxNumber">

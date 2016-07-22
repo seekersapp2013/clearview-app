@@ -17,9 +17,9 @@ const API_URLS = {
 }
 
 class DoctorDirectoryPage extends React.Component {
-  itemRenderer (doctor, index) {
+  itemRenderer (doctor, index, isAndroid) {
     return (
-      <DoctorListItem doctor={doctor} index={index} />
+      <DoctorListItem doctor={doctor} index={index} isAndroid={isAndroid} />
     )
   }
   render () {
@@ -42,9 +42,9 @@ class DoctorDirectoryPage extends React.Component {
 }
 
 class HospitalDirectoryPage extends React.Component {
-  itemRenderer (hospital, index) {
+  itemRenderer (hospital, index, isAndroid) {
     return (
-      <HospitalListItem hospital={hospital} index={index} />
+      <HospitalListItem hospital={hospital} index={index} isAndroid={isAndroid} />
     )
   }
   render () {
@@ -67,9 +67,9 @@ class HospitalDirectoryPage extends React.Component {
 }
 
 class PharmacyDirectoryPage extends React.Component {
-  itemRenderer (pharmacy, index) {
+  itemRenderer (pharmacy, index, isAndroid) {
     return (
-      <PharmacyListItem pharmacy={pharmacy} index={index} />
+      <PharmacyListItem pharmacy={pharmacy} index={index} isAndroid={isAndroid} />
     )
   }
   render () {
@@ -92,9 +92,9 @@ class PharmacyDirectoryPage extends React.Component {
 }
 
 class IndividualHospitalDirectoryPage extends React.Component {
-  itemRenderer (contact, index) {
+  itemRenderer (contact, index, isAndroid) {
     return (
-      <HospitalDirectoryListItem contact={contact} index={index} />
+      <HospitalDirectoryListItem contact={contact} index={index} isAndroid={isAndroid} />
     )
   }
 

@@ -5,8 +5,11 @@ import './HospitalListItem.styl'
 class HospitalListItem extends React.Component {
   render () {
     const {hospital, index} = this.props
-    let itemLink = '#/hospitals/' + encodeURIComponent(JSON.stringify(hospital))
-    let rowColor = getRowColor(index)
+    const itemLink = '#/hospitals/' + encodeURIComponent(JSON.stringify(hospital))
+    const telephoneLink = (this.props.isAndroid)
+      ? 'tel:' + hospital.PhoneNumber
+      : 'telprompt:' + hospital.PhoneNumber
+    const rowColor = getRowColor(index)
     return (
       <div className="HospitalListItem__Container" style={{backgroundColor: rowColor}}>
         <div className="HospitalListItem">
@@ -21,7 +24,7 @@ class HospitalListItem extends React.Component {
               <a
                 className="Button Button--Call"
                 style={{textDecoration: 'none'}}
-                href={'telprompt://' + hospital.PhoneNumber}>
+                href={telephoneLink}>
                 Call
               </a>
             </div>
@@ -42,7 +45,8 @@ class HospitalListItem extends React.Component {
 
 HospitalListItem.propTypes = {
   hospital: React.PropTypes.object.isRequired,
-  index: React.PropTypes.number.isRequired
+  index: React.PropTypes.number.isRequired,
+  isAndroid: React.PropTypes.bool.isRequired
 }
 
 export default HospitalListItem

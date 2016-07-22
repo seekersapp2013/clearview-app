@@ -5,9 +5,12 @@ import './PharmacyListItem.styl'
 class PharmacyListItem extends React.Component {
   render () {
     const {pharmacy, index} = this.props
-    let rowColor = getRowColor(index)
-    let addressString = pharmacy.Address + ' ' + pharmacy.City + ', ' + pharmacy.State + ' ' + pharmacy.Zip
-    let googleMapsLink = 'http://maps.google.com/?q=' + encodeURIComponent(addressString)
+    const rowColor = getRowColor(index)
+    const addressString = pharmacy.Address + ' ' + pharmacy.City + ', ' + pharmacy.State + ' ' + pharmacy.Zip
+    const googleMapsLink = 'http://maps.google.com/?q=' + encodeURIComponent(addressString)
+    const telephoneLink = (this.props.isAndroid)
+      ? 'tel:' + pharmacy.PhoneNumber
+      : 'telprompt:' + pharmacy.PhoneNumber
     return (
       <div className="PharmacyListItem__Container" style={{backgroundColor: rowColor}}>
         <div className="PharmacyListItem">
@@ -29,7 +32,7 @@ class PharmacyListItem extends React.Component {
               <a
                 className="Button Button--Call"
                 style={{textDecoration: 'none'}}
-                href={'telprompt://' + pharmacy.PhoneNumber}>
+                href={telephoneLink}>
                 Call
               </a>
             </div>
@@ -51,7 +54,8 @@ class PharmacyListItem extends React.Component {
 
 PharmacyListItem.propTypes = {
   pharmacy: React.PropTypes.object.isRequired,
-  index: React.PropTypes.number.isRequired
+  index: React.PropTypes.number.isRequired,
+  isAndroid: React.PropTypes.bool.isRequired
 }
 
 export default PharmacyListItem

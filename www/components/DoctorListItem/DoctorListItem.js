@@ -8,6 +8,9 @@ class DoctorListItem extends React.Component {
     const itemLink = '#/doctors/' + encodeURIComponent(JSON.stringify(doctor))
     const doctorName = doctor.LastName + ', ' + doctor.FirstName
     const backgroundColor = getRowColor(index)
+    const telephoneLink = (this.props.isAndroid)
+      ? 'tel:' + doctor.PhoneNumber
+      : 'telprompt:' + doctor.PhoneNumber
     return (
       <div className="DoctorListItem__Container" style={{backgroundColor: backgroundColor}}>
         <div className="DoctorListItem">
@@ -17,11 +20,7 @@ class DoctorListItem extends React.Component {
           <div className="DoctorListItem--PhoneNumber">{doctor.PhoneNumber}</div>
           <div className="DoctorListItem__Links">
             <div>
-              <a
-                className="Button Button--Call"
-                href={'telprompt://' + doctor.PhoneNumber}>
-                Call
-              </a>
+              <a className="Button Button--Call" href={telephoneLink}>Call</a>
             </div>
             <div>
               <a
@@ -39,7 +38,8 @@ class DoctorListItem extends React.Component {
 
 DoctorListItem.propTypes = {
   doctor: React.PropTypes.object.isRequired,
-  index: React.PropTypes.number.isRequired
+  index: React.PropTypes.number.isRequired,
+  isAndroid: React.PropTypes.bool.isRequired
 }
 
 export default DoctorListItem

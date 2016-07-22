@@ -18,7 +18,7 @@ class HospitalDirectoryListItem extends React.Component {
     const rowColor = getRowColor(index)
     const phoneNumbers = this.filterEmptyItems([contact.PhoneNumber, contact.PhoneNumber2, contact.PhoneNumber3])
     const phoneNumberElements = phoneNumbers.map((number, index) => {
-      let lineNumText = (phoneNumbers.length > 1)
+      const lineNumText = (phoneNumbers.length > 1)
         ? 'Line ' + (index + 1) + ': '
         : ''
       return (
@@ -61,7 +61,8 @@ class HospitalDirectoryListItem extends React.Component {
 
 HospitalDirectoryListItem.propTypes = {
   contact: React.PropTypes.object.isRequired,
-  index: React.PropTypes.number.isRequired
+  index: React.PropTypes.number.isRequired,
+  isAndroid: React.PropTypes.bool.isRequired
 }
 
 export default HospitalDirectoryListItem

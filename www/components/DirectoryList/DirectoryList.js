@@ -6,8 +6,9 @@ import './DirectoryList.styl'
 class DirectoryList extends React.Component {
   renderItem ({index, isScrolling}) {
     let item = this.props.items[index]
+    let isAndroid = this.props.isAndroid
     return (
-      this.props.itemRenderer(item, index)
+      this.props.itemRenderer(item, index, isAndroid)
     )
   }
   render () {
@@ -34,7 +35,8 @@ class DirectoryList extends React.Component {
 DirectoryList.propTypes = {
   items: React.PropTypes.array,
   itemRenderer: React.PropTypes.func.isRequired,
-  itemHeight: React.PropTypes.number.isRequired
+  itemHeight: React.PropTypes.number.isRequired,
+  isAndroid: React.PropTypes.bool.isRequired
 }
 
 export default DirectoryList

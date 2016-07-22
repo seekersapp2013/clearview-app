@@ -145,19 +145,25 @@ class DirectoryPage extends React.Component {
 
   render () {
     const itemsShownCount = this.state.itemsShown.length
-    let itemIdentifier = (itemsShownCount === 1)
+    const itemIdentifier = (itemsShownCount === 1)
       ? this.props.itemType.toLowerCase()
       : this.props.itemTypePlural.toLowerCase()
-    let itemsCountText = itemsShownCount + ' ' + itemIdentifier + ' found.'
-    if (this.state.loading) itemsCountText = 'Loading...'
+
+    const itemsCountText = (this.state.loading)
+      ? 'Loading...'
+      : itemsShownCount + ' ' + itemIdentifier + ' found.'
+
+    const _BackLink = this.props.backLink
+      ? this.props.backLink
+      : <BackLink to="/" text="Home" />
+
+    const userAgent = navigator.userAgent.toLowerCase()
+    const isAndroid = (userAgent.indexOf('android') > -1)
     const backLinkHeight = 30
     const headerHeight = 140
     const footerHeight = 50
     const bottomPadding = 14
     const remainingPage = document.documentElement.clientHeight - (backLinkHeight + headerHeight + footerHeight + bottomPadding)
-    let _BackLink = this.props.backLink
-      ? this.props.backLink
-      : <BackLink to="/" text="Home" />
 
     return (
       <div className={'Page DirectoryPage ' + this.props.itemType.toLowerCase()} onTouchStart={::this.blurFocus}>
@@ -190,6 +196,7 @@ class DirectoryPage extends React.Component {
           itemRenderer={this.props.itemRenderer}
           title={this.props.title}
           initialCount={this.state.itemsShown.length}
+          isAndroid={isAndroid}
         />
       </div>
     )
