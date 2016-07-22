@@ -10,9 +10,10 @@
     <content src="index.html" />
     <preference name="AutoHideSplashScreen" value="false" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-legacy-whitelist" spec="1" />
     <access origin="*" />
-    <access origin="tel:*" launch-external="no" />
-    <access origin="telprompt:*" launch-external="no" />
+    <access origin="tel:*" launch-external="yes" />
+    <access origin="telprompt:*" launch-external="yes" />
     <access origin="http://clearviewcancer.com:3000/*" />
     <access origin="https://clearviewcancer.com:3000/*" />
     <allow-intent href="http://*/*" />
