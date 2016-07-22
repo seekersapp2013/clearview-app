@@ -15,6 +15,7 @@ class DoctorDetailPage extends React.Component {
     const addressString = item.Address + ' ' + item.City + ', ' + item.State + ' ' + item.Zip
     const errorReportLink = '#/error/' + encodeURIComponent(JSON.stringify(item))
     const googleMapsLink = 'http://maps.google.com/?q=' + encodeURIComponent(addressString)
+    const userAgent = navigator.userAgent.toLowerCase()
     const telephoneLink = (userAgent.indexOf('android') > -1)
       ? 'tel:' + item.PhoneNumber
       : 'telprompt:' + item.PhoneNumber
