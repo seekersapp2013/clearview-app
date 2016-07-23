@@ -3,7 +3,6 @@ import HomePage from './containers/HomePage'
 import AppointmentPage from './containers/AppointmentPage'
 import ErrorReportPage from './containers/ErrorReportPage'
 import DoctorDetailPage from './containers/DoctorDetailPage'
-
 import {
   DoctorDirectoryPage,
   HospitalDirectoryPage,
