@@ -26,3 +26,6 @@ store/*
 
 hooks/README.md
 android-debug.apk
+
+server/data/*
+server/credentials/*

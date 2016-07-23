@@ -1,15 +1,20 @@
 {
-  "name": "clearview-app-no-redux",
+  "name": "clearview-app",
   "version": "1.0.0",
   "description": "",
   "main": "www/app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mfi-dev/clearview-app.git"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "node dev-server.js",
     "build-ios": "webpack && cordova build ios && open 'platforms/ios/CCI Directory.xcodeproj'",
     "build-android": "webpack && cordova build android && cp platforms/android/build/outputs/apk/android-debug.apk .",
     "lint": "eslint ./www *.js",
-    "generate-icons": "./node_modules/splashicon-generator/bin/splashicon-generator --imagespath=\"./www/assets\""
+    "generate-icons": "./node_modules/splashicon-generator/bin/splashicon-generator --imagespath=\"./www/assets\"",
+    "update-data": "./server/scripts/update_data.sh"
   },
   "author": "Wesley Hall",
   "license": "MIT",
@@ -19,6 +24,9 @@
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "es6-promise": "^3.2.1",
+    "express": "^4.14.0",
+    "express-cors": "0.0.3",
+    "mongoose": "^4.5.5",
     "path": "^0.12.7",
     "react": "^15.2.1",
     "react-addons-shallow-compare": "^15.2.1",
