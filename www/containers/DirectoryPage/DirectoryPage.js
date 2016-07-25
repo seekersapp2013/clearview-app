@@ -1,5 +1,5 @@
 import React from 'react'
-import Axios from 'axios'
+import axios from 'axios'
 import DebouncedInput from 'react-debounce-input'
 import BackLink from '../../components/BackLink'
 import DirectoryList from '../../components/DirectoryList'
@@ -10,6 +10,9 @@ require('es6-promise').polyfill()
 const browserStorage = (typeof window.localStorage === 'undefined')
   ? null
   : window.localStorage
+
+const Axios = axios.create()
+Axios.defaults.timeout = 8000
 
 class DirectoryPage extends React.Component {
   constructor (props) {
@@ -25,6 +28,7 @@ class DirectoryPage extends React.Component {
   }
 
   getAllItems () {
+    let page = this
     if (this.props.items && this.props.items.length) {
       this.setState({
         items: this.props.items,
@@ -33,18 +37,22 @@ class DirectoryPage extends React.Component {
         loading: false
       })
     } else {
-      let page = this
       let getItems = new Promise((resolve, reject) => {
         Axios.get(page.props.getAllItemsUrl)
           .then(function (response) {
-            resolve(response.data.message)
+            page.setState({
+              loadedFromLocalStorage: false
+            }, resolve(response.data.message))
           })
           .catch(function (error) {
             let items = JSON.parse(browserStorage.getItem(page.props.localStorageKey))
             if (browserStorage !== null && items && items.length > 0) {
               page.setState({
+                items: items,
+                itemsShown: items,
+                loading: false,
                 loadedFromLocalStorage: true
-              }, resolve(items))
+              })
             } else {
               reject(error)
             }
@@ -65,9 +73,8 @@ class DirectoryPage extends React.Component {
           }
         })
         .catch(function (error) {
-          console.log('You must have an internet connection.')
           page.setState({
-            error: error
+            error: 'Error. Make sure that you have an active internet connection. Please try again later.'
           })
         })
     }
@@ -149,10 +156,6 @@ class DirectoryPage extends React.Component {
       ? this.props.itemType.toLowerCase()
       : this.props.itemTypePlural.toLowerCase()
 
-    const itemsCountText = (this.state.loading)
-      ? 'Loading...'
-      : itemsShownCount + ' ' + itemIdentifier + ' found.'
-
     const _BackLink = this.props.backLink
       ? this.props.backLink
       : <BackLink to="/" text="Home" />
@@ -164,6 +167,14 @@ class DirectoryPage extends React.Component {
     const footerHeight = 50
     const bottomPadding = 14
     const remainingPage = document.documentElement.clientHeight - (backLinkHeight + headerHeight + footerHeight + bottomPadding)
+
+    let itemsCountText = (this.state.loading)
+      ? 'Loading...'
+      : itemsShownCount + ' ' + itemIdentifier + ' found.'
+
+    itemsCountText = (this.state.error)
+      ? this.state.error
+      : itemsCountText
 
     return (
       <div className={'Page DirectoryPage ' + this.props.itemType.toLowerCase()} onTouchStart={::this.blurFocus}>
