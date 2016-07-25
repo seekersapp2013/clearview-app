@@ -76,6 +76,7 @@ class DirectoryPage extends React.Component {
           page.setState({
             error: 'Error. No connection to server. Try again later.'
           })
+          console.log(error)
         })
     }
   }
