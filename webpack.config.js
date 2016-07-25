@@ -9,22 +9,15 @@ var output = {
   publicPath: '/'
 }
 
-var assetsLoaders = [
+var assetLoaders = [
   {test: /\.css$/, loader: 'style!css!postcss'},
   {test: /\.styl$/, loader: 'style!css!postcss!stylus?dest='},
   {test: /\.json$/, loader: 'json'},
-  {
-    test: /\.svg(\?v=[0-9].[0-9].[0-9])?$/,
-    loader: 'url?name=[name].[ext]!url?limit=' + embedFileSize +
-      '&mimetype=image/svg+xml'
-  },
+  {test: /\.svg(\?v=[0-9].[0-9].[0-9])?$/, loader: 'url?name=[name].[ext]!url?limit=' + embedFileSize + '&mimetype=image/svg+xml'},
   {test: /\.png$/, loader: 'url?limit=' + embedFileSize + '&mimetype=image/png'},
   {test: /\.jpg$/, loader: 'url?limit=' + embedFileSize + '&mimetype=image/jpeg'},
   {test: /\.gif$/, loader: 'url?limit=' + embedFileSize + '&mimetype=image/gif'},
-  {
-    test: /\.(woff|woff2|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-    loader: 'url?name=[name].[ext]!url?limit=' + embedFileSize
-  }
+  {test: /\.(woff|woff2|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?name=[name].[ext]!url?limit=' + embedFileSize}
 ]
 
 var lintLoader = {
@@ -32,10 +25,7 @@ var lintLoader = {
   exclude: /node_modules/,
   loader: 'eslint-loader'
 }
-var plugins = [
-  new webpack.optimize.OccurenceOrderPlugin(),
-  new webpack.optimize.DedupePlugin()
-]
+
 var babelLoader = {
   loader: 'babel-loader',
   include: [
@@ -51,43 +41,29 @@ var babelLoader = {
 
 var commonConfig = {
   output: output,
-  standard: {
-    parser: 'babel-eslint'
-  },
+  standard: {parser: 'babel-eslint'},
   postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ],
-
-  resolve: {
-    extensions: ['', '.js', '.styl']
-  },
-
-  stats: {
-    chunkModules: false,
-    colors: true
-  }
+  resolve: {extensions: ['', '.js', '.styl']},
+  stats: {chunkModules: false, colors: true}
 }
+
+var plugins = [
+  new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.optimize.DedupePlugin()
+]
 
 var production = Object.assign({
   devtool: 'eval',
   entry: [
     './www/app'
   ],
-
   plugins: plugins.concat([
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: { warnings: false }
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {NODE_ENV: JSON.stringify('production')}
-    }),
+    new webpack.optimize.UglifyJsPlugin({compressor: { warnings: false }}),
+    new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify('production')}}),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.NoErrorsPlugin()
   ]),
-
-  module: {
-    loaders: [].concat(
-      assetsLoaders, babelLoader
-    )
-  }
+  module: {loaders: [].concat(assetLoaders, babelLoader)}
 }, commonConfig)
 
 var development = Object.assign({
@@ -99,14 +75,12 @@ var development = Object.assign({
     'webpack-dev-server/client?http://0.0.0.0:3000',
     'webpack/hot/only-dev-server'
   ],
-
   plugins: plugins.concat([
     new webpack.HotModuleReplacementPlugin()
   ]),
-
   module: {
     loaders: [].concat(
-      assetsLoaders, {
+      assetLoaders, {
         test: /\.jsx?$/,
         loaders: ['react-hot'],
         include: path.join(__dirname, 'www')
@@ -115,5 +89,6 @@ var development = Object.assign({
     preLoaders: [].concat(lintLoader)
   }
 }, commonConfig)
+
 module.exports = production
 module.exports.development = development

@@ -1,14 +1,16 @@
 import async from 'async'
 import jsonfile from 'jsonfile'
 import GoogleSpreadsheet from 'google-spreadsheet'
+import path from 'path'
 
 const PRIVATE_KEY = require('../credentials/google-service-account-key.json')
 const SPREADSHEET_ID = '1kZQbsrzJqKgtie-a5cXGWdO5_c7pjEYrMkw_OizUyac'
-const jsonFileLocations = {
-  'doctors': '../data/doctors.json',
-  'pharmacies': '../data/pharmacies.json',
-  'hospitals': '../data/hospitals.json'
+const JSON_FILE_LOCATIONS = {
+  'doctors': path.resolve(__dirname, '..', 'data/', 'doctors.json'),
+  'pharmacies': path.resolve(__dirname, '..', 'data/', 'pharmacies.json'),
+  'hospitals': path.resolve(__dirname, '..', 'data/', 'hospitals.json')
 }
+
 
 let doc = new GoogleSpreadsheet(SPREADSHEET_ID)
 async.series([
@@ -160,7 +162,7 @@ function extractPharmaciesFromSpreadsheet (worksheet) {
 }
 
 function writeToFile (collectionName, newCollection) {
-  let filename = jsonFileLocations[collectionName]
+  let filename = JSON_FILE_LOCATIONS[collectionName]
 
   if (newCollection && newCollection.length) {
     jsonfile.writeFileSync(filename, newCollection, {spaces: 2})

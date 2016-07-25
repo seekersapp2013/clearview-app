@@ -8,24 +8,29 @@
     "url": "git+https://github.com/mfi-dev/clearview-app.git"
   },
   "scripts": {
-    "start": "node server.js",
     "dev": "node dev-server.js",
     "build-ios": "webpack && cordova build ios && open 'platforms/ios/CCI Directory.xcodeproj'",
     "build-android": "webpack && cordova build android && cp platforms/android/build/outputs/apk/android-debug.apk .",
-    "lint": "eslint ./www *.js",
     "generate-icons": "./node_modules/splashicon-generator/bin/splashicon-generator --imagespath=\"./www/assets\"",
-    "update-data": "./server/scripts/update_data.sh"
+    "lint": "eslint ./www *.js",
+    "start": "babel-node ./server/index.js",
+    "update-data": "babel-node ./server/scripts/import_spreadsheet.js && mongoimport --db clearview --collection doctors --drop --type json --file server/data/doctors.json --jsonArray && mongoimport --db clearview --collection pharmacies --drop --type json --file server/data/pharmacies.json --jsonArray && mongoimport --db clearview --collection hospitals --drop --type json --file server/data/hospitals.json --jsonArray"
   },
   "author": "Wesley Hall",
   "license": "MIT",
   "dependencies": {
     "autoprefixer": "^6.3.7",
     "axios": "^0.13.0",
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-2": "^6.11.0",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "es6-promise": "^3.2.1",
     "express": "^4.14.0",
     "express-cors": "0.0.3",
+    "google-spreadsheet": "^2.0.3",
+    "jsonfile": "^2.3.1",
     "mongoose": "^4.5.5",
     "path": "^0.12.7",
     "react": "^15.2.1",
@@ -34,11 +39,12 @@
     "react-fastclick": "^2.1.2",
     "react-virtualized": "^7.12.1",
     "stylus": "^0.54.5",
+    "sync": "^0.2.5",
     "webpack": "^1.13.1"
   },
   "devDependencies": {
     "babel": "^6.5.2",
-    "babel-core": "^6.10.4",
+    "babel-core": "^6.11.4",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.2.1",

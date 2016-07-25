@@ -1,10 +1,6 @@
 {
   "extends": [ "standard", "standard-react", "es2015" ],
   "parser": "babel-eslint",
-  "env": {
-    "mocha": true
-  },
-  "globals": {
-    "expect": true
-  }
+  "env": {},
+  "globals": {"expect": true}
 }
