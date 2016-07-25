@@ -28,5 +28,7 @@ hooks/README.md
 android-debug.apk
 
 server/data/*
+!server/data/.gitkeep
 server/credentials/*
+!server/credentials/.gitkeep
 ./icon.png
