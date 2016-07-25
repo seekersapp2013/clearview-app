@@ -74,7 +74,7 @@ class DirectoryPage extends React.Component {
         })
         .catch(function (error) {
           page.setState({
-            error: 'Error. Make sure that you have an active internet connection. Please try again later.'
+            error: 'Error. No connection to server. Try again later.'
           })
         })
     }
