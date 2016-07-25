@@ -13,7 +13,7 @@
     "build-android": "webpack && cordova build android && cp platforms/android/build/outputs/apk/android-debug.apk .",
     "generate-icons": "./node_modules/splashicon-generator/bin/splashicon-generator --imagespath=\"./www/assets\"",
     "lint": "eslint ./www *.js",
-    "start": "babel-node ./server/index.js",
+    "start": "babel-node ./server/api.js",
     "update-data": "babel-node ./server/scripts/import_spreadsheet.js && mongoimport --db clearview --collection doctors --drop --type json --file server/data/doctors.json --jsonArray && mongoimport --db clearview --collection pharmacies --drop --type json --file server/data/pharmacies.json --jsonArray && mongoimport --db clearview --collection hospitals --drop --type json --file server/data/hospitals.json --jsonArray"
   },
   "author": "Wesley Hall",
