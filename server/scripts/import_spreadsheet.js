@@ -11,7 +11,6 @@ const JSON_FILE_LOCATIONS = {
   'hospitals': path.resolve(__dirname, '..', 'data/', 'hospitals.json')
 }
 
-
 let doc = new GoogleSpreadsheet(SPREADSHEET_ID)
 async.series([
   function setAuth (step) {
