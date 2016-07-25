@@ -24,7 +24,7 @@ const HospitalSchema = new Mongoose.Schema({
   Zip: String,
   County: String,
   PhoneNumber: String,
-  Directory: String
+  Directory: Schema.Types.Mixed
 })
 const HospitalModel = db.model('Hospital', HospitalSchema)
 
