@@ -1,6 +1,7 @@
 import Express from 'express'
 import BodyParser from 'body-parser'
 import CORS from 'express-cors'
+import Email from 'emailjs'
 import {
   DoctorModel,
   HospitalModel,
@@ -15,6 +16,7 @@ App.use(BodyParser.urlencoded({'extended': false}))
 App.use(CORS({
   allowedOrigins: [
     'http://localhost:3000',
+    'http://localhost:4000',
     'http://clearview.mfisupport.com'
   ]
 }))
@@ -94,6 +96,33 @@ Router.route('/pharmacies/search/:searchString')
       const response = (err)
         ? {error: true, message: 'Server Error when querying pharmacies collection.'}
         : {error: false, message: data}
+      res.json(response)
+    })
+  })
+
+Router.route('/appointment/:message')
+  .post(function (req, res) {
+    const CREDENTIALS = require('./credentials/gmail-account.json')
+    const Server = Email.server.connect({
+      user: CREDENTIALS.login,
+      password: CREDENTIALS.pass,
+      host: 'smtp.gmail.com',
+      ssl: true
+    })
+    const message = JSON.parse(decodeURIComponent(req.params.message))
+    let text = ['New Appointment Request']
+    text.push('---------')
+    text.push('')
+    text.push('Name: ' + message.name)
+    text.push('Email: ' + message.email)
+    text.push('Phone: ' + message.phone)
+    text.push('')
+    text.push('(sent via CCI Directory App)')
+    message.text = text.join('\n')
+    Server.send(message, function (err, message) {
+      const response = (err)
+        ? {error: true, message: 'Error. Please try again later.'}
+        : {error: false, message: message.text}
       res.json(response)
     })
   })
