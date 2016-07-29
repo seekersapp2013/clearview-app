@@ -100,7 +100,7 @@ class IndividualHospitalDirectoryPage extends React.Component {
 
   render () {
     const item = JSON.parse(decodeURIComponent(this.props.params.item))
-    let title = item.Name + ' Directory'
+    let title = item.Name
     let backLink = <BackLink to="/hospitals" text="Back" />
     return (
       <DirectoryPage

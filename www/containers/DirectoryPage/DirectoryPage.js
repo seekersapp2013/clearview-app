@@ -163,7 +163,7 @@ class DirectoryPage extends React.Component {
 
     const userAgent = navigator.userAgent.toLowerCase()
     const isAndroid = (userAgent.indexOf('android') > -1)
-    const backLinkHeight = 30
+    const backLinkHeight = 38
     const headerHeight = 140
     const footerHeight = 50
     const bottomPadding = 14
