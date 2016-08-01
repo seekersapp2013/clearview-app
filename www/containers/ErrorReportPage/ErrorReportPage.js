@@ -24,7 +24,7 @@ class ErrorReportPage extends React.Component {
       text: '',
       from: 'CCI Directory App <clearviewcancerinstitute@gmail.com>',
       to: 'CCI <clearviewcancerinstitute@gmail.com>, Wesley Hall <wesleyahall@gmail.com>',
-      subject: 'New Appointment Request',
+      subject: 'Error Report',
       email: userEmail
     }
 
