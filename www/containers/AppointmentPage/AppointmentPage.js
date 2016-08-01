@@ -2,6 +2,7 @@ import React from 'react'
 import BackLink from '../../components/BackLink'
 import FooterNav from '../../components/FooterNav'
 import Axios from 'axios'
+import 'react-fastclick'
 import './AppointmentPage.styl'
 import '../App/App.styl'
 
@@ -13,24 +14,32 @@ class AppointmentPage extends React.Component {
       error: null
     }
   }
+
   sendMail () {
-    let page = this
     const userName = document.getElementById('name').value
     const userPhone = document.getElementById('phone').value
     const userEmail = document.getElementById('email').value
-    const message = {
-      text: 'New Appointment Request',
+
+    let page = this
+    let message = {
+      text: '',
       from: 'CCI Directory App <clearviewcancerinstitute@gmail.com>',
       to: 'CCI <clearviewcancerinstitute@gmail.com>, Wesley Hall <wesleyahall@gmail.com>',
       subject: 'New Appointment Request',
-      phone: userPhone,
-      email: userEmail,
-      name: userName
+      email: userEmail
     }
-    const encodedMessage = encodeURIComponent(JSON.stringify(message))
-    Axios.post('http://clearviewcancer.com:3000/appointment/' + encodedMessage)
+
+    let emailBody = ['New Appointment Request']
+    emailBody.push('------------------')
+    emailBody.push('')
+    emailBody.push('Name: ' + userName)
+    emailBody.push('Email: ' + userPhone)
+    emailBody.push('Phone: ' + userEmail)
+    emailBody.push('')
+    message.text = emailBody.join('\n')
+
+    Axios.post('http://clearviewcancer.com:3000/sendmail/' + encodeURIComponent(JSON.stringify(message)))
       .then(function (response) {
-        console.log(response)
         page.setState({
           messageSent: true
         })
@@ -95,12 +104,12 @@ class AppointmentPage extends React.Component {
       )
     }
 
-    const mainSection = (!this.state.messageSent)
+    let main = (!this.state.messageSent)
       ? renderForm(::this.sendMail)
       : renderSuccessMessage()
 
-    const main = (!this.state.error)
-      ? mainSection
+    main = (!this.state.error)
+      ? main
       : renderError(this.state.error)
 
     return (
@@ -125,7 +134,7 @@ class AppointmentPage extends React.Component {
 
 AppointmentPage.propTypes = {
   messageSent: React.PropTypes.bool,
-  error: React.PropTypes.mixed
+  error: React.PropTypes.any
 }
 
 AppointmentPage.defaultProps = {

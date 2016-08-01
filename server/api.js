@@ -8,6 +8,7 @@ import {
   PharmacyModel
 } from './models'
 
+const CREDENTIALS = require('./credentials/gmail-account.json')
 const Router = Express.Router()
 let App = Express()
 
@@ -100,26 +101,16 @@ Router.route('/pharmacies/search/:searchString')
     })
   })
 
-Router.route('/appointment/:message')
+Router.route('/sendmail/:message')
   .post(function (req, res) {
-    const CREDENTIALS = require('./credentials/gmail-account.json')
     const Server = Email.server.connect({
       user: CREDENTIALS.login,
       password: CREDENTIALS.pass,
       host: 'smtp.gmail.com',
       ssl: true
     })
-    const message = JSON.parse(decodeURIComponent(req.params.message))
-    let text = ['New Appointment Request']
-    text.push('---------')
-    text.push('')
-    text.push('Name: ' + message.name)
-    text.push('Email: ' + message.email)
-    text.push('Phone: ' + message.phone)
-    text.push('')
-    text.push('(sent via CCI Directory App)')
-    message.text = text.join('\n')
-    Server.send(message, function (err, message) {
+    const email = JSON.parse(decodeURIComponent(req.params.message))
+    Server.send(email, function (err, message) {
       const response = (err)
         ? {error: true, message: 'Error. Please try again later.'}
         : {error: false, message: message.text}
