@@ -23,7 +23,7 @@ class ErrorReportPage extends React.Component {
     let message = {
       text: '',
       from: 'CCI Directory App <clearviewcancerinstitute@gmail.com>',
-      to: 'CCI <clearviewcancerinstitute@gmail.com>, Wesley Hall <wesleyahall@gmail.com>',
+      to: 'CCI <clearviewcancerinstitute@gmail.com>',
       subject: 'Error Report',
       email: userEmail
     }
@@ -50,6 +50,7 @@ class ErrorReportPage extends React.Component {
         })
       })
   }
+
   render () {
     const footerHeight = 50
     const mainHeight = document.documentElement.clientHeight - (footerHeight)
