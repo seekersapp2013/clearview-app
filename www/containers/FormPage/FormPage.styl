@@ -1,6 +1,6 @@
 @require('../../assets/styles/vars.styl')
 
-.AppointmentPage
+.FormPage
   main
     text-align center
 
@@ -21,9 +21,12 @@
   &__Icon
     &:before
       color $brown
-      content '\f271'
       font-family FontAwesome
       font-size 46px
+    &--ErrorReport:before
+      content '\f044'
+    &--Appointment:before
+      content '\f271'
 
   &__Instructions
     color $brown
@@ -33,9 +36,6 @@
     line-height 24px
     margin 12px 0
 
-  &__InputGroup
-    padding 12px 0
-
   &__Message
     padding 40px
     font Lato
@@ -44,8 +44,16 @@
   &__Form
     width 90%
     margin 0 auto
-
+    &__InputGroup
+      padding 12px 0
+      & input.error
+        border 1px solid red
+      & input.error::before
+        content attr(error)
+        display block
+        width 100%
+        
   .Button
     width 90%
-    margin 40px auto
+    margin 20px auto
     padding 15px 0

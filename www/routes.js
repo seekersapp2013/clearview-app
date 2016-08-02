@@ -1,8 +1,10 @@
 import App from './containers/App'
 import HomePage from './containers/HomePage'
-import AppointmentPage from './containers/AppointmentPage'
-import ErrorReportPage from './containers/ErrorReportPage'
 import DoctorDetailPage from './containers/DoctorDetailPage'
+import {
+  AppointmentForm,
+  ErrorReportForm
+} from './containers/FormPages'
 import {
   DoctorDirectoryPage,
   HospitalDirectoryPage,
@@ -25,10 +27,10 @@ export default([
   },
   {
     path: '/appointment',
-    component: AppointmentPage
+    component: AppointmentForm
   },
   {
     path: '/error/:item',
-    component: ErrorReportPage
+    component: ErrorReportForm
   }
 ])
