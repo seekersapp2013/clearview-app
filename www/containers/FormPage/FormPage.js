@@ -1,16 +1,39 @@
 import React from 'react'
 import BackLink from '../../components/BackLink'
 import FooterNav from '../../components/FooterNav'
-// import Axios from 'axios'
+import Axios from 'axios'
 import 'react-fastclick'
 import './FormPage.styl'
+
+const FORM_SUBMISSION_URL = 'http://clearviewcancer.com:3000/sendmail/'
 
 class FormPage extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       messageSent: false,
-      error: null
+      error: null,
+      validationHelp: null,
+      loading: false
+    }
+  }
+
+  renderEmail () {
+    const userName = document.getElementById('name').value
+    const userPhone = document.getElementById('phone').value
+    const userEmail = document.getElementById('email').value
+
+    if (userName.length && userPhone.length && userEmail.length) {
+      let emailBody = [this.props.emailHeader]
+      emailBody.push('------------------')
+      emailBody.push('')
+      emailBody.push('Name: ' + userName)
+      emailBody.push('Email: ' + userPhone)
+      emailBody.push('Phone: ' + userEmail)
+      emailBody.push('')
+      return (emailBody.join('\n'))
+    } else {
+      return false
     }
   }
 
@@ -20,55 +43,63 @@ class FormPage extends React.Component {
       document.querySelector('.FormPage__Form__InputGroup--Phone'),
       document.querySelector('.FormPage__Form__InputGroup--Email')
     ]
-
-    formInputs.map((derp) => {
-      console.log(derp)
-      const input = derp.querySelector('input')
-      const errorMessage = derp.querySelector('.errorMessage')
+    let errors = []
+    formInputs.map((el) => {
+      const input = el.querySelector('input')
       const hasInput = (input.value.trim() !== '')
       if (!hasInput) {
         input.classList.add('error')
-        errorMessage.innerHtml = 'This field is required.'
+        errors.push('error')
+      } else {
+        input.classList.remove('error')
       }
     })
+    return (errors.length === 0)
+  }
+
+  submitForm (emailBody) {
+    let message = {
+      text: emailBody,
+      from: 'CCI Directory App <clearviewcancerinstitute@gmail.com>',
+      to: 'CCI <clearviewcancerinstitute@gmail.com>',
+      subject: this.props.emailSubject
+    }
+    let _this = this
+    Axios.post(FORM_SUBMISSION_URL + encodeURIComponent(JSON.stringify(message)))
+      .then(function () {
+        _this.setState({
+          error: null,
+          loading: false,
+          messageSent: true
+        })
+      })
+      .catch(function (error) {
+        _this.setState({
+          error: error,
+          loading: false,
+          messageSent: false
+        })
+      })
   }
 
   onSubmit () {
-    // const formStatus = this.validateForm()
-    this.validateForm()
-    // const userName = document.getElementById('name').value
-    // const userPhone = document.getElementById('phone').value
-    // const userEmail = document.getElementById('email').value
-
-    // let page = this
-    // let message = {
-    //   text: '',
-    //   from: 'CCI Directory App <clearviewcancerinstitute@gmail.com>',
-    //   to: 'CCI <clearviewcancerinstitute@gmail.com>',
-    //   subject: this.props.emailSubject
-    // }
-    //
-    // let emailBody = [this.props.emailHeader]
-    // emailBody.push('------------------')
-    // emailBody.push('')
-    // emailBody.push('Name: ' + userName)
-    // emailBody.push('Email: ' + userPhone)
-    // emailBody.push('Phone: ' + userEmail)
-    // emailBody.push('')
-    // message.text = emailBody.join('\n')
-    //
-    // Axios.post('http://clearviewcancer.com:3000/sendmail/' + encodeURIComponent(JSON.stringify(message)))
-    //   .then(function (response) {
-    //     page.setState({
-    //       messageSent: true
-    //     })
-    //   })
-    //   .catch(function (error) {
-    //     page.setState({
-    //       messageSent: false,
-    //       error: error
-    //     })
-    //   })
+    const isValid = this.validateForm()
+    if (isValid) {
+      this.setState({
+        validationHelp: null,
+        loading: true
+      })
+      const emailBody = this.renderEmail()
+      if (emailBody) {
+        this.submitForm(emailBody)
+      }
+    } else {
+      this.setState({
+        validationHelp: 'Please complete all required fields.',
+        loading: false,
+        messageSent: false
+      })
+    }
   }
 
   render () {
@@ -78,17 +109,14 @@ class FormPage extends React.Component {
           <div className="FormPage__Form__InputGroup FormPage__Form__InputGroup--Name">
             <label htmlFor="name">My name</label>
             <input type="text" id="name" name="name" placeholder="Enter your name" required="required" />
-            <div className="errorMessage"></div>
           </div>
           <div className="FormPage__Form__InputGroup FormPage__Form__InputGroup--Phone">
             <label htmlFor="phone">My phone number</label>
             <input type="text" id="phone" name="phone" placeholder="(555) 555-5555" />
-            <div className="errorMessage"></div>
           </div>
           <div className="FormPage__Form__InputGroup FormPage__Form__InputGroup--Email">
             <label htmlFor="email">My email address</label>
             <input type="email" id="email" name="email" placeholder="Enter your email address" />
-            <div className="errorMessage"></div>
           </div>
           <div className="Button" onClick={onSubmit}>Submit</div>
         </div>
@@ -125,6 +153,10 @@ class FormPage extends React.Component {
       ? main
       : renderError(this.state.error)
 
+    const loading = (this.state.loading)
+      ? (<div className="FormPage__Form__LoadingIndicator">Submitting Form...</div>)
+      : null
+
     return (
       <div className="Page FormPage ErrorReportPage">
         <BackLink to={this.props.backLinkLocation} text={backLinkText} />
@@ -135,7 +167,11 @@ class FormPage extends React.Component {
               {this.props.headerBody}
             </div>
           </header>
-          <main>{main}</main>
+          <main>
+            <div className="FormPage__Form__Error">{this.state.validationHelp}</div>
+            {loading}
+            {main}
+          </main>
         </div>
         <FooterNav />
       </div>
