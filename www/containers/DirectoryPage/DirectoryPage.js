@@ -156,18 +156,11 @@ class DirectoryPage extends React.Component {
     const itemIdentifier = (itemsShownCount === 1)
       ? this.props.itemType.toLowerCase()
       : this.props.itemTypePlural.toLowerCase()
-
     const _BackLink = this.props.backLink
       ? this.props.backLink
       : <BackLink to="/" text="Home" />
-
     const userAgent = navigator.userAgent.toLowerCase()
     const isAndroid = (userAgent.indexOf('android') > -1)
-    const backLinkHeight = 38
-    const headerHeight = 140
-    const footerHeight = 50
-    const bottomPadding = 14
-    const remainingPage = document.documentElement.clientHeight - (backLinkHeight + headerHeight + footerHeight + bottomPadding)
 
     let itemsCountText = (this.state.loading)
       ? 'Loading...'
@@ -201,8 +194,6 @@ class DirectoryPage extends React.Component {
         <DirectoryList
           items={this.state.itemsShown}
           itemHeight={this.props.itemHeight}
-          width={document.documentElement.clientWidth - 20}
-          height={remainingPage}
           rowCount={this.state.items.length}
           rowHeight={this.props.rowHeight}
           itemRenderer={this.props.itemRenderer}

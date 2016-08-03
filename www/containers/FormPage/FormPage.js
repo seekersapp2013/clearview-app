@@ -167,7 +167,7 @@ class FormPage extends React.Component {
               {this.props.headerBody}
             </div>
           </header>
-          <main>
+          <main style={{height: document.documentElement.clientHeight - 281}}>
             <div className="FormPage__Form__Error">{this.state.validationHelp}</div>
             {loading}
             {main}
