@@ -2,7 +2,6 @@ import React from 'react'
 import BackLink from '../../components/BackLink'
 import FooterNav from '../../components/FooterNav'
 import Axios from 'axios'
-import 'react-fastclick'
 import './FormPage.styl'
 
 const FORM_SUBMISSION_URL = 'http://clearviewcancer.com:3000/sendmail/'

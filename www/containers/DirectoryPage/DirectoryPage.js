@@ -3,6 +3,7 @@ import axios from 'axios'
 import DebouncedInput from 'react-debounce-input'
 import BackLink from '../../components/BackLink'
 import DirectoryList from '../../components/DirectoryList'
+import FastClick from 'fastclick'
 import './DirectoryPage.styl'
 
 require('es6-promise').polyfill()
@@ -82,6 +83,7 @@ class DirectoryPage extends React.Component {
   }
 
   componentDidMount () {
+    FastClick.attach(document.body)
     this.getAllItems()
     let itemsShown = this.state.items
     if (this.props.items && this.props.items.length > 0) {

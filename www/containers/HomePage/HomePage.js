@@ -1,8 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router'
+import FastClick from 'fastclick'
 import './HomePage.styl'
 
 class HomePage extends React.Component {
+
+  componentDidMount () {
+    FastClick.attach(document.body)
+  }
+
   renderLink (url, title) {
     // a bug in older versions of safari's web view makes viewport height change over time
     // so we need to set the menu links height with javascript here. :(
