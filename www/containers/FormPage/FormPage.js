@@ -160,7 +160,7 @@ class FormPage extends React.Component {
 
     const mainHeight = (smallPhone)
       ? document.documentElement.clientHeight - 200
-      : document.documentElement.clientHeight - 250
+      : document.documentElement.clientHeight - 252
 
     const pageClass = (smallPhone)
       ? 'FormPage FormPage--small'
