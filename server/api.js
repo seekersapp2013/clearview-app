@@ -118,5 +118,10 @@ Router.route('/sendmail/:message')
     })
   })
 
+Router.route('/loaderio-fd1cdacd3eabdbda6e8ed5433186881d')
+  .get(function (req, res) {
+    res.send('loaderio-fd1cdacd3eabdbda6e8ed5433186881d')
+  })
+
 App.use('/', Router)
 App.listen(3000)
