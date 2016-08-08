@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import DebouncedInput from 'react-debounce-input'
-import StatusBarSpacer from '../../components/StatusBarSpacer'
 import BackLink from '../../components/BackLink'
 import DirectoryList from '../../components/DirectoryList'
 import FastClick from 'fastclick'
@@ -177,7 +176,6 @@ class DirectoryPage extends React.Component {
     return (
       <div className={'Page DirectoryPage ' + this.props.itemType.toLowerCase()} onTouchStart={::this.blurFocus}>
         <header>
-          <StatusBarSpacer variant="Light" />
           {_BackLink}
           <h1>{this.props.title}</h1>
           <div>

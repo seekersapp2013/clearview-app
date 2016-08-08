@@ -154,7 +154,7 @@ class FormPage extends React.Component {
 
     const loading = (this.state.loading)
       ? (<div className="FormPage__Form__LoadingIndicator">Submitting Form...</div>)
-      : null
+      : ''
 
     const smallPhone = (document.documentElement.clientHeight <= 480)
 
@@ -165,6 +165,10 @@ class FormPage extends React.Component {
     const pageClass = (smallPhone)
       ? 'FormPage FormPage--small'
       : 'FormPage'
+
+    const message = (this.state.loading)
+      ? loading
+      : <div className="FormPage__Form__Error">{this.state.validationHelp}</div>
 
     return (
       <div className={'Page ErrorReportPage ' + pageClass}>
@@ -179,8 +183,7 @@ class FormPage extends React.Component {
             </div>
           </header>
           <main style={{height: mainHeight}}>
-            <div className="FormPage__Form__Error">{this.state.validationHelp}</div>
-            {loading}
+            {message}
             {main}
           </main>
         </div>

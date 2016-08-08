@@ -1,5 +1,4 @@
 import React from 'react'
-import StatusBarSpacer from '../../components/StatusBarSpacer'
 import BackLink from '../../components/BackLink'
 import './DoctorDetailPage.styl'
 
@@ -29,7 +28,6 @@ class DoctorDetailPage extends React.Component {
     return (
       <div className={'Page ' + pageClass}>
         <header>
-          <StatusBarSpacer variant="Light" />
           <BackLink to="/doctors" text="Back" />
           <div className="DoctorDetailPage__Icon"></div>
           <h1>{title}</h1>

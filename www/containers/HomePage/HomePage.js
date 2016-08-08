@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
 import FastClick from 'fastclick'
-import StatusBarSpacer from '../../components/StatusBarSpacer'
 import './HomePage.styl'
 
 class HomePage extends React.Component {
@@ -40,7 +39,6 @@ class HomePage extends React.Component {
     const pharmacyLink = this.renderLink('/pharmacies', 'Pharmacy')
     return (
       <div className="Page HomePage" style={{height: pageHeight}}>
-        <StatusBarSpacer variant="Light" />
         <nav className="Menu">
           <h1>I want to find a</h1>
           {doctorLink}
