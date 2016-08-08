@@ -1,4 +1,5 @@
 import React from 'react'
+import StatusBarSpacer from '../../components/StatusBarSpacer'
 import BackLink from '../../components/BackLink'
 import './DoctorDetailPage.styl'
 
@@ -20,45 +21,53 @@ class DoctorDetailPage extends React.Component {
       ? 'tel:' + item.PhoneNumber
       : 'telprompt:' + item.PhoneNumber
 
+    const smallPhone = (document.documentElement.clientHeight <= 480)
+    const pageClass = (smallPhone)
+      ? 'DoctorDetailPage DoctorDetailPage--small'
+      : 'DoctorDetailPage'
+
     return (
-      <div className="Page DoctorDetailPage">
+      <div className={'Page ' + pageClass}>
         <header>
+          <StatusBarSpacer variant="Light" />
           <BackLink to="/doctors" text="Back" />
           <div className="DoctorDetailPage__Icon"></div>
           <h1>{title}</h1>
         </header>
-        <div key={item._id}>
-          <div className="DoctorDetailPage__Specialty">
-            <h3>Specialties</h3>
-            <div>{item.Specialty}</div>
-          </div>
-          <div className="DoctorDetailPage__Address">
-            <h3>Address</h3>
-            <div>{item.PracticeName}</div>
-            <div>{item.Address}</div>
-            <div>{item.City}, {item.State} {item.Zip}</div>
-            <div>
-              <a className="Button Button--Map" href={googleMapsLink} target="_blank">Map</a>
+        <main>
+          <div key={item._id}>
+            <div className="DoctorDetailPage__Specialty">
+              <h3>Specialties</h3>
+              <div>{item.Specialty}</div>
             </div>
-          </div>
-          <div>
-            <div className="DoctorDetailPage__PhoneNumber">
-              <h3>Phone</h3>
-              {item.PhoneNumber}
+            <div className="DoctorDetailPage__Address">
+              <h3>Address</h3>
+              <div>{item.PracticeName}</div>
+              <div>{item.Address}</div>
+              <div>{item.City}, {item.State} {item.Zip}</div>
               <div>
-                <a className="Button Button--Call" href={telephoneLink}>Call</a>
+                <a className="Button Button--Map" href={googleMapsLink} target="_blank">Map</a>
               </div>
             </div>
-            <div className="DoctorDetailPage__FaxNumber">
-              <h3>Fax</h3>
-              {item.FaxNumber}
+            <div>
+              <div className="DoctorDetailPage__PhoneNumber">
+                <h3>Phone</h3>
+                {item.PhoneNumber}
+                <div>
+                  <a className="Button Button--Call" href={telephoneLink}>Call</a>
+                </div>
+              </div>
+              <div className="DoctorDetailPage__FaxNumber">
+                <h3>Fax</h3>
+                {item.FaxNumber}
+              </div>
+            </div>
+            <div className="DoctorDetailPage__UpdateRequestContainer">
+              <span>Information out of date?</span>
+              <a className="DoctorDetailPage__UpdateRequestLink" href={errorReportLink}>Request Update</a>
             </div>
           </div>
-          <div className="DoctorDetailPage__UpdateRequestContainer">
-            <span>Information out of date?</span>
-            <a className="DoctorDetailPage__UpdateRequestLink" href={errorReportLink}>Request Update</a>
-          </div>
-        </div>
+        </main>
       </div>
     )
   }

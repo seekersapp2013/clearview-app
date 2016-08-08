@@ -111,7 +111,7 @@ class FormPage extends React.Component {
           </div>
           <div className="FormPage__Form__InputGroup FormPage__Form__InputGroup--Phone">
             <label htmlFor="phone">My phone number</label>
-            <input type="text" id="phone" name="phone" placeholder="(555) 555-5555" />
+            <input type="number" id="phone" name="phone" placeholder="(555) 555-5555" />
           </div>
           <div className="FormPage__Form__InputGroup FormPage__Form__InputGroup--Email">
             <label htmlFor="email">My email address</label>
@@ -156,17 +156,29 @@ class FormPage extends React.Component {
       ? (<div className="FormPage__Form__LoadingIndicator">Submitting Form...</div>)
       : null
 
+    const smallPhone = (document.documentElement.clientHeight <= 480)
+
+    const mainHeight = (smallPhone)
+      ? document.documentElement.clientHeight - 200
+      : document.documentElement.clientHeight - 250
+
+    const pageClass = (smallPhone)
+      ? 'FormPage FormPage--small'
+      : 'FormPage'
+
     return (
-      <div className="Page FormPage ErrorReportPage">
-        <BackLink to={this.props.backLinkLocation} text={backLinkText} />
+      <div className={'Page ErrorReportPage ' + pageClass}>
         <div>
           <header>
-            <div className={'FormPage__Icon FormPage__Icon--' + this.props.iconClassName}></div>
+            <div className="FormPage__TopBar">
+              <BackLink to={this.props.backLinkLocation} text={backLinkText} />
+              <div className={'FormPage__Icon FormPage__Icon--' + this.props.iconClassName}></div>
+            </div>
             <div className="FormPage__Instructions">
               {this.props.headerBody}
             </div>
           </header>
-          <main style={{height: document.documentElement.clientHeight - 281}}>
+          <main style={{height: mainHeight}}>
             <div className="FormPage__Form__Error">{this.state.validationHelp}</div>
             {loading}
             {main}

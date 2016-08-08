@@ -12,7 +12,7 @@ class DirectoryList extends React.Component {
     )
   }
   render () {
-    const headerAndFooterHeightCombined = 140 + 50
+    const headerAndFooterHeightCombined = 144 + 50
     const viewPortWidthMinusPadding = document.documentElement.clientWidth - 40
     const viewPortHeightMinusHeaderAndFooterHeights = document.documentElement.clientHeight - headerAndFooterHeightCombined
     return (

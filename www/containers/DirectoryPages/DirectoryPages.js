@@ -31,8 +31,8 @@ class DoctorDirectoryPage extends React.Component {
         itemType="Doctor"
         itemTypePlural="Doctors"
         itemRenderer={::this.itemRenderer}
-        itemHeight={165}
-        rowHeight={165}
+        itemHeight={140}
+        rowHeight={140}
         getAllItemsUrl={API_URLS.doctors}
         searchItemsUrl={API_URLS.doctorsSearch}
         localStorageKey="doctors"
@@ -57,7 +57,7 @@ class HospitalDirectoryPage extends React.Component {
         itemTypePlural="Hospitals"
         itemRenderer={::this.itemRenderer}
         itemHeight={165}
-        rowHeight={165}
+        rowHeight={160}
         getAllItemsUrl={API_URLS.hospitals}
         searchItemsUrl={API_URLS.hospitalsSearch}
         localStorageKey="hospitals"
@@ -81,8 +81,8 @@ class PharmacyDirectoryPage extends React.Component {
         itemType="Pharmacy"
         itemTypePlural="Pharmacies"
         itemRenderer={::this.itemRenderer}
-        itemHeight={165}
-        rowHeight={165}
+        itemHeight={140}
+        rowHeight={140}
         getAllItemsUrl={API_URLS.pharmacies}
         searchItemsUrl={API_URLS.pharmaciesSearch}
         localStorageKey="pharmacies"
@@ -110,8 +110,8 @@ class IndividualHospitalDirectoryPage extends React.Component {
         itemType="Contact"
         itemTypePlural="Contacts"
         itemRenderer={::this.itemRenderer}
-        itemHeight={155}
-        rowHeight={155}
+        itemHeight={140}
+        rowHeight={140}
         getAllItemsUrl="http://does.not.apply"
         searchItemsUrl="http://does.not.apply"
         localStorageKey="hospitals"

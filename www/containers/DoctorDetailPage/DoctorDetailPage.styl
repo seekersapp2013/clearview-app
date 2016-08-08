@@ -1,8 +1,7 @@
 @require('../../assets/styles/vars.styl')
 .DoctorDetailPage
   color $brown
-  padding-left 20px
-  padding-top 40px
+  padding-top 32px
   &__Icon
     text-align center !important
   &__Icon::before
@@ -22,6 +21,10 @@
     font-family FontAwesome
     padding-right 7px
     color $brown
+
+  main
+    padding-left 20px
+
   &__Specialty h3:before
     content '\f005'
   &__Address h3:before
@@ -30,10 +33,8 @@
     content '\f095'
   &__FaxNumber h3:before
     content '\f1ac'
-
   & .Button
     margin-top 14px
-
   &__UpdateRequestContainer
     padding 14px 0
     display block
@@ -45,3 +46,23 @@
     border-radius 5px
     margin-left 14px
     text-decoration none
+
+.DoctorDetailPage--small
+  main
+    font-size 13px
+    
+  .Button
+    font-size 12px
+    padding 8px
+    margin-top 4px
+
+  .DoctorDetailPage__Icon::before
+    font-size 30px
+  h1
+    font-size 22px
+    padding 0 !important
+    padding-top 6px
+  h3
+    font-size 14px
+    padding-top 7px
+    margin 4px 0
