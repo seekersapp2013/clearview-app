@@ -1,5 +1,6 @@
 import Express from 'express'
 import BodyParser from 'body-parser'
+import Compression from 'compression'
 import CORS from 'express-cors'
 import Email from 'emailjs'
 import {
@@ -12,6 +13,7 @@ const CREDENTIALS = require('./credentials/gmail-account.json')
 const Router = Express.Router()
 let App = Express()
 
+App.use(Compression())
 App.use(BodyParser.json())
 App.use(BodyParser.urlencoded({'extended': false}))
 App.use(CORS({
