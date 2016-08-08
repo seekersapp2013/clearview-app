@@ -10,7 +10,7 @@
 
   header
     background-color $tan
-    padding 66px 6px 20px 6px
+    padding 66px 6px 20px
     overflow hidden
 
   label
@@ -25,8 +25,10 @@
   input
     border 1px solid $light-brown
     padding-left 6px
-    font-size 14px
+    font-size 18px
     width 100%
+    box-sizing border-box
+    height 32px
 
   p
     margin-top 16px
@@ -53,7 +55,7 @@
     font-size 14px
     font-style bold
     line-height 16px
-    padding 22px 11px 0px
+    padding 22px 11px 0
 
   &__Message
     font Lato
@@ -75,29 +77,32 @@
     &__Error
       color red
       font-size 12px
-      margin-top 12px
       height 13px
+      margin-top 12px
       width 100%
 
     &__LoadingIndicator
       color $brown
 
   .Button
-    margin 20px auto
-    padding 15px 4px
+    margin-top 30px
+    padding 15px 0
     width 100%
+
 
 .FormPage--small
   .FormPage__Icon::before
     font-size 28px
     margin-left -14px
+
   .FormPage__Instructions
     font-size 13px
-    line-height: 14px
+    line-height 14px
     padding 18px 10px 0
+
   header
+    padding-bottom 6px
     padding-top 38px
-    padding-bottom: 6px
 
   input
     font-size 13px
@@ -107,7 +112,8 @@
     font-size 13px
 
   .Button
-    padding 10px 4px
+    margin-top 20px
+    padding 10px 0
 
   .FormPage__Form
     &__InputGroup
