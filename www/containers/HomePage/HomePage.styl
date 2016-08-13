@@ -1,11 +1,14 @@
 @require('../../assets/styles/vars.styl')
 
 .HomePage
-  padding $status-bar-spacer-height 5% 0 5%
+  padding 0 5%
   display flex
   flex-direction column
   justify-content center
   text-align center
+
+.Logo
+  padding $status-bar-spacer-height 0
 
 .Menu
   text-align center
@@ -15,13 +18,14 @@
     text-decoration none
     &:active &Item__Container
       box-shadow none
-      -webkit-transform scale3d(.97, .97, 1)
+      -webkit-transform scale3d(.98, .98, 1)
+      color  $white-alpha
 
   &__LinkItem__Container
     background-color $green
     border-radius 15px
     box-shadow 0 4px 8px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19)
-    color $white
+    color $off-white
     display table
     height 18vh
     margin-bottom 2vh
