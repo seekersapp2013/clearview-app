@@ -25,7 +25,7 @@ res/*
 store/*
 
 hooks/README.md
-android-debug.apk
+*.apk
 
 server/data/*
 !server/data/.gitkeep
