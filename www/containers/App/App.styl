@@ -2,11 +2,11 @@
 @require('../../assets/styles/fonts.css')
 
 html
+  -webkit-tap-highlight-color rgba(0, 0, 0, 0)
+  -webkit-touch-callout none
+  -webkit-user-select none
   background $off-white
   height 100%
-  -webkit-user-select none
-  -webkit-touch-callout none
-  -webkit-tap-highlight-color rgba(0,0,0,0)
 
 body
   font-family Lato
@@ -15,8 +15,8 @@ body
 h1
   color $brown
   font-size 24px
-  padding 12px 0
   margin 0
+  padding 12px 0
 
 a
   -webkit-tap-highlight-color rgba(0, 0, 0, 0)
@@ -27,11 +27,11 @@ a
   color $green
 
 .Page
-  text-align center
-  padding-bottom $footer-nav-height
-  margin 0
-  position relative
   box-sizing content-box
+  margin 0
+  padding-bottom $footer-nav-height
+  position relative
+  text-align center
 
 .PageHeader__Title
   color $brown
@@ -42,51 +42,57 @@ nav a
   padding-right 10px
 
 button
-  padding 10px
   background-color $green
-  margin-right: 15px
-  font-size 14px
   box-shadow 0 1px 2px 0 rgba(0, 0, 0, .70)
+  font-size 14px
+  margin-right 15px
+  padding 10px
 
 input
-  width 90%
-  height 30px
   font-size 18px
+  height 30px
   margin 0 auto
+  width 90%
 
 .Button
-  padding 10px
   background-color $green
-  margin-right: 15px
-  font-size 14px
   box-shadow 0 1px 2px 0 rgba(0, 0, 0, .70)
   color $white !important
   display inline-block
+  font-size 14px
+  margin-right 15px
+  padding 10px
   text-decoration none
+
   &:active,
   &--Active
-    box-shadow none
     -webkit-transform scale3d(.98, .98, 1)
+    box-shadow none
     color $white-alpha !important
+
     &:before,
     &:after
       color $white-alpha !important
+
   &--Call::before
+    color $white
     content '\f095'
     font-family FontAwesome
     padding-right 10px
-    color $white
+
   &--MoreInfo::after
+    color $white
     content '\f061'
     font-family FontAwesome
-    color $white
     padding-left 10px
+
   &--Directory::before
-    content '\f02d'
-    font-family: FontAwesome
     color $white
-    padding-right 10px
-  &--Map:before
+    content '\f02d'
     font-family FontAwesome
+    padding-right 10px
+
+  &--Map:before
     content '\f041'
+    font-family FontAwesome
     padding-right 7px

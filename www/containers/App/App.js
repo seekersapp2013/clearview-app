@@ -3,7 +3,6 @@ import React from 'react'
 import FooterNav from '../../components/FooterNav'
 
 class App extends React.Component {
-
   render () {
     const { children } = this.props
     return (

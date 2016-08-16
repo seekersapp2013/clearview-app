@@ -2,36 +2,43 @@
 
 .PharmacyListItem
   &__Container
+    box-sizing border-box
     color $green
+    height 100%
+    overflow-x hidden
+    overflow-y hidden
     padding 15px 5px 0 10px
     text-align left
     width 100%
-    height 100%
-    overflow-y hidden
-    overflow-x hidden
-    box-sizing border-box
 
   &__Links
     padding-top 6px
+
     div
       display inline-block
+
       a
         color $off-white
         text-decoration none
   &__Name
     font-size 16px
+
   &__Address
     font-size 13px
+
   &__PhoneNumbers
-    padding: 7px 0
+    padding 7px 0
+
     div
       display inline-block
+
   &__PhoneNumber:before
     content '\f095'
     font-family FontAwesome
     padding-right 7px
+
   &__FaxNumber:before
     content '\f1ac'
     font-family FontAwesome
-    padding-right 7px
     margin-left 14px
+    padding-right 7px

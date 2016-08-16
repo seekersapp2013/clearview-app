@@ -2,67 +2,82 @@
 .DoctorDetailPage
   color $brown
   padding-top 32px
+
   &__Icon
     text-align center !important
+
   &__Icon::before
     content 'a'
     font-family clearview
     font-size 36px
     width 100%
+
   .BackLink
     background-color $off-white
+
   div
     text-align left
+
   h1
     width 100%
+
   h3
     margin 16px 0 5px
+
   h3:before
+    color $brown
     font-family FontAwesome
     padding-right 7px
-    color $brown
 
   main
     padding-left 20px
 
   &__Specialty h3:before
     content '\f005'
+
   &__Address h3:before
     content '\f041'
+
   &__PhoneNumber h3:before
     content '\f095'
+
   &__FaxNumber h3:before
     content '\f1ac'
+
   & .Button
     margin-top 14px
+
   &__UpdateRequestContainer
-    padding 14px 0
     display block
+    padding 14px 0
+
   &__UpdateRequestLink
-    font-size 13px
-    padding 4px
     border 1px $green solid
-    color $green
     border-radius 5px
+    color $green
+    font-size 13px
     margin-left 14px
+    padding 4px
     text-decoration none
 
 .DoctorDetailPage--small
   main
     font-size 13px
-    
+
   .Button
     font-size 12px
-    padding 8px
     margin-top 4px
+    padding 8px
 
   .DoctorDetailPage__Icon::before
     font-size 30px
+
   h1
     font-size 22px
     padding 0 !important
     padding-top 6px
+
   h3
     font-size 14px
-    padding-top 7px
     margin 4px 0
+    padding-top 7px

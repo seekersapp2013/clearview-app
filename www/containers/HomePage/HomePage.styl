@@ -1,10 +1,10 @@
 @require('../../assets/styles/vars.styl')
 
 .HomePage
-  padding 0 5%
   display flex
   flex-direction column
   justify-content center
+  padding 0 5%
   text-align center
 
 .Menu
@@ -23,16 +23,14 @@
     border-radius 15px
     box-shadow 0 4px 8px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19)
     color $white
-    display table
-    height 18vh
-    margin-bottom 2vh
-    width 100%
     display flex
     flex-direction column
+    height 18vh
     justify-content center
+    margin-bottom 2vh
+    width 100%
 
   &__LinkItem
-    display table-cell
     text-align center
     vertical-align middle
 
@@ -45,11 +43,11 @@
       &:before
         font-family clearview
       &--Doctors:before
-        content: 'a'
+        content 'a'
       &--Hospitals:before
-        content: 'b'
+        content 'b'
       &--Pharmacies:before
-        content: 'c'
+        content 'c'
 
     &__Title
       display inline-block
