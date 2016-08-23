@@ -18,6 +18,8 @@ Axios.defaults.timeout = 8000
 class DirectoryPage extends React.Component {
   constructor (props) {
     super(props)
+    this.getAllItems = this.getAllItems.bind(this)
+    this.handleSearchStringChange = this.handleSearchStringChange.bind(this)
     this.state = {
       items: [],
       itemsStored: [],
@@ -61,12 +63,11 @@ class DirectoryPage extends React.Component {
       })
       Promise.all([getItems])
         .then(function (returnedArrays) {
-          let items = returnedArrays[0]
-          let itemsString = JSON.stringify(items)
-          let shouldSaveToStorage = !page.state.loadedFromLocalStorage
+          const itemsString = JSON.stringify(returnedArrays[0])
+          const shouldSaveToStorage = !page.state.loadedFromLocalStorage
           page.setState({
-            items: items,
-            itemsShown: items,
+            items: returnedArrays[0],
+            itemsShown: returnedArrays[0],
             loading: false
           })
           if (shouldSaveToStorage) {
@@ -85,12 +86,8 @@ class DirectoryPage extends React.Component {
   componentDidMount () {
     FastClick.attach(document.body)
     this.getAllItems()
-    let itemsShown = this.state.items
-    if (this.props.items && this.props.items.length > 0) {
-      itemsShown = this.props.items
-    }
     this.setState({
-      itemsShown: itemsShown
+      itemsShown: this.props.items.length ? this.props.items : this.state.items
     })
   }
 
@@ -188,6 +185,7 @@ class DirectoryPage extends React.Component {
               autoCapitalize="off"
               spellCheck="false"
               className="FilterInput"
+              id="FilterInput"
             />
           </div>
           <div className="DirectoryPage__ItemCount">

@@ -11,6 +11,7 @@
     <preference name="AutoHideSplashScreen" value="true" />
     <preference name="SplashScreenDelay" value="2000" />
     <preference name="FadeSplashScreen" value="false"/>
+    <preference name="orientation" value="portrait" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-legacy-whitelist" spec="1" />
     <access origin="*" />

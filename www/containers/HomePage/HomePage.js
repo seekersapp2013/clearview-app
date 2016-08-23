@@ -26,7 +26,7 @@ class HomePage extends React.Component {
         activeClassName="Menu__Link--Active">
         <div className="Menu__LinkItem__Container" style={menuItemStyles}>
           <div className="Menu__LinkItem">
-            <div className={'Menu__LinkItem__Icon Menu__LinkItem__Icon--' + title}></div>
+            <div aria-hidden="true" className={'Menu__LinkItem__Icon Menu__LinkItem__Icon--' + title}></div>
             <div className="Menu__LinkItem__Title">{title}</div>
           </div>
         </div>
