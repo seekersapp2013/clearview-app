@@ -26,7 +26,7 @@ App.use(CORS({
 
 Router.route('/doctors')
   .get(function (req, res) {
-    DoctorModel.find({}, null, { sort: { LastName: 1 } }, function (err, data) {
+    DoctorModel.find({}, null, { sort: { LastName: 1, FirstName: 1 } }, function (err, data) {
       const response = (err)
         ? {error: true, message: 'Error Loading Doctors.'}
         : {error: false, message: data}
@@ -43,7 +43,7 @@ Router.route('/doctors/search/:searchString')
         {Specialty: {$regex: searchString, $options: 'i'}},
         {PracticeName: {$regex: searchString, $options: 'i'}}
       ]
-    }, null, { sort: { LastName: 1 } }, function (err, data) {
+    }, null, { sort: { LastName: 1, FirstName: 1 } }, function (err, data) {
       const response = (err)
         ? {error: true, message: 'Server Error when querying doctors collection.'}
         : {error: false, message: data}
