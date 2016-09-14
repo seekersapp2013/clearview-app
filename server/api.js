@@ -79,7 +79,7 @@ Router.route('/hospitals/search/:searchString')
 
 Router.route('/pharmacies')
   .get(function (req, res) {
-    PharmacyModel.find({}, null, { sort: { Name: 1 }}, function (err, data) {
+    PharmacyModel.find({}, null, {sort: { Name: 1 }}, function (err, data) {
       const response = (err)
         ? {error: true, message: 'Error Loading Pharmacies.'}
         : {error: false, message: data}
@@ -111,7 +111,12 @@ Router.route('/sendmail/:message')
       host: 'smtp.gmail.com',
       ssl: true
     })
+
     const email = JSON.parse(decodeURIComponent(req.params.message))
+    email.to = (email.subject === 'Appointment Request via Directory App')
+      ? 'CCI <CCINewPatientSchedulers@ccihsv.com>'
+      : email.to
+
     Server.send(email, function (err, message) {
       const response = (err)
         ? {error: true, message: 'Error. Please try again later.'}
