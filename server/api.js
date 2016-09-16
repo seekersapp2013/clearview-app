@@ -112,7 +112,7 @@ Router.route('/sendmail/:message')
       ssl: true
     })
 
-    const email = JSON.parse(decodeURIComponent(req.params.message))
+    let email = JSON.parse(decodeURIComponent(req.params.message))
     email.to = (email.subject === 'Appointment Request via Directory App')
       ? 'CCI <CCINewPatientSchedulers@ccihsv.com>'
       : email.to
