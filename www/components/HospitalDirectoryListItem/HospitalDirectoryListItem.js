@@ -28,14 +28,17 @@ class HospitalDirectoryListItem extends React.Component {
       )
     })
     const callLinks = phoneNumbers.map((number, index) => {
-      let buttonText = (phoneNumbers.length > 1)
+      const buttonText = (phoneNumbers.length > 1)
         ? 'Line ' + (index + 1)
         : 'Call'
+      const telephoneLink = (this.props.isAndroid)
+        ? 'tel://' + number
+        : 'telprompt://' + number
       return (
         <div key={'button' + index}>
           <a
             className="Button Button--Call"
-            href={'telprompt://' + number}>
+            href={telephoneLink}>
             {buttonText}
           </a>
         </div>

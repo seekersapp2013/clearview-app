@@ -111,7 +111,7 @@ class FormPage extends React.Component {
           </div>
           <div className="FormPage__Form__InputGroup FormPage__Form__InputGroup--Phone">
             <label htmlFor="phone">My phone number</label>
-            <input type="number" id="phone" name="phone" placeholder="(555) 555-5555" />
+            <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" />
           </div>
           <div className="FormPage__Form__InputGroup FormPage__Form__InputGroup--Email">
             <label htmlFor="email">My email address</label>
