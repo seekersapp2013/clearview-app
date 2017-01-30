@@ -1,3 +1,5 @@
+/* global launchnavigator */
+
 import React from 'react'
 import getRowColor from '../../helpers/getRowColor'
 import './PharmacyListItem.styl'
@@ -7,7 +9,6 @@ class PharmacyListItem extends React.Component {
     const {pharmacy, index} = this.props
     const rowColor = getRowColor(index)
     const addressString = pharmacy.Address + ' ' + pharmacy.City + ', ' + pharmacy.State + ' ' + pharmacy.Zip
-    const googleMapsLink = 'http://maps.google.com/?q=' + encodeURIComponent(addressString)
     const telephoneLink = (this.props.isAndroid)
       ? 'tel:' + pharmacy.PhoneNumber
       : 'telprompt:' + pharmacy.PhoneNumber
@@ -40,8 +41,7 @@ class PharmacyListItem extends React.Component {
               <a
                 className="Button Button--Map"
                 style={{textDecoration: 'none'}}
-                href={googleMapsLink}
-                target="_blank">
+                onClick={function () { launchnavigator.navigate(addressString, {app: launchnavigator.APP.USER_SELECT}) }}>
                 Map
               </a>
             </div>

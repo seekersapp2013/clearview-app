@@ -1,3 +1,5 @@
+/* global launchnavigator */
+
 import React from 'react'
 import BackLink from '../../components/BackLink'
 import './DoctorDetailPage.styl'
@@ -14,7 +16,6 @@ class DoctorDetailPage extends React.Component {
     const title = this.renderTitle(item)
     const addressString = item.Address + ' ' + item.City + ', ' + item.State + ' ' + item.Zip
     const errorReportLink = '#/error/' + encodeURIComponent(JSON.stringify(item))
-    const googleMapsLink = 'http://maps.google.com/?q=' + encodeURIComponent(addressString)
     const userAgent = navigator.userAgent.toLowerCase()
     const telephoneLink = (userAgent.indexOf('android') > -1)
       ? 'tel:' + item.PhoneNumber
@@ -44,7 +45,7 @@ class DoctorDetailPage extends React.Component {
               <div>{item.Address}</div>
               <div>{item.City}, {item.State} {item.Zip}</div>
               <div>
-                <a className="Button Button--Map" href={googleMapsLink} target="_blank">Map</a>
+                <a className="Button Button--Map" onClick={function () { launchnavigator.navigate(addressString, {app: launchnavigator.APP.USER_SELECT}) }}>Map</a>
               </div>
             </div>
             <div>
