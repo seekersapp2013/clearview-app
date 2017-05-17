@@ -42,7 +42,7 @@ var babelLoader = {
 var commonConfig = {
   output: output,
   standard: {parser: 'babel-eslint'},
-  postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ],
+  postcss: [ autoprefixer({ browsers: ['last 2 versions'], remove: false }) ],
   resolve: {extensions: ['', '.js', '.styl']},
   stats: {chunkModules: false, colors: true}
 }
