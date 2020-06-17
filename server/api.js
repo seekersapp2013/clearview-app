@@ -20,9 +20,15 @@ App.use(CORS({
   allowedOrigins: [
     'http://localhost:3000',
     'http://localhost:4000',
-    'http://clearview.mfisupport.com'
+    '*'
   ]
 }))
+
+App.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 Router.route('/doctors')
   .get(function (req, res) {
