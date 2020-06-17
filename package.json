@@ -32,7 +32,7 @@
     "fastclick": "^1.0.6",
     "google-spreadsheet": "^2.0.3",
     "jsonfile": "^2.3.1",
-    "mongoose": "^4.5.5",
+    "mongoose": "^5.7.5",
     "nodemailer": "^6.4.10",
     "path": "^0.12.7",
     "react": "^15.2.1",
