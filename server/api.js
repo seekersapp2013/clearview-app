@@ -3,7 +3,6 @@ import BodyParser from 'body-parser'
 import Compression from 'compression'
 import CORS from 'express-cors'
 import nodemailer from 'nodemailer'
-import Email from 'emailjs'
 import {
   DoctorModel,
   HospitalModel,
