@@ -2,6 +2,7 @@ import Express from 'express'
 import BodyParser from 'body-parser'
 import Compression from 'compression'
 import CORS from 'express-cors'
+import nodemailer from 'nodemailer'
 import Email from 'emailjs'
 import {
   DoctorModel,
@@ -9,7 +10,21 @@ import {
   PharmacyModel
 } from './models'
 
-const CREDENTIALS = require('./credentials/gmail-account.json')
+const CREDENTIALS = require('./credentials/gmail-account.json');
+const SERVICE_ACCOUNT = require('./credentials/google-service-account-key.json');
+
+let transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    type: 'OAuth2',
+    user: CREDENTIALS.login,
+    serviceClient: SERVICE_ACCOUNT.client_id,
+    privateKey: SERVICE_ACCOUNT.private_key,
+  }
+});
+
 const Router = Express.Router()
 let App = Express()
 
@@ -111,25 +126,18 @@ Router.route('/pharmacies/search/:searchString')
 
 Router.route('/sendmail/:message')
   .post(function (req, res) {
-    const Server = Email.server.connect({
-      user: CREDENTIALS.login,
-      password: CREDENTIALS.pass,
-      host: 'smtp.gmail.com',
-      ssl: true
-    })
-
-    let email = JSON.parse(decodeURIComponent(req.params.message))
+    let email = JSON.parse(decodeURIComponent(req.params.message));
     email.to = (email.subject === 'Appointment Request via Directory App')
       ? 'CCI <CCINewPatientScheduler@ccihsv.com>'
-      : 'Leigh Ann Lackey <llackey@ccihsv.com>'
+      : 'Leigh Ann Lackey <llackey@ccihsv.com>';
 
-    Server.send(email, function (err, message) {
+    transporter.sendMail(email, function (err, info) {
       const response = (err)
         ? {error: true, message: 'Error. Please try again later.'}
-        : {error: false, message: message.text}
-      res.json(response)
-    })
-  })
+        : {error: false, message: 'Success!'};
+      res.json(response);
+    });
+  });
 
 App.use('/', Router)
 App.listen(3000)
