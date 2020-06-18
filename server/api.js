@@ -11,16 +11,19 @@ import {
 } from './models'
 
 const SCOPES = ['https://www.googleapis.com/auth/gmail.send'];
-const KEYFILE = path.join(__dirname, './credentials/google-service-account-key.json');
+const KEYFILE = require('./credentials/google-service-account-key.json');
 
-const oAuth2Client = new google.auth.OAuth2({
-  keyFile: KEYFILE,
-  scopes: SCOPES
-});
+const jwtClient = new google.auth.JWT(
+  keyfile.client_email,
+  keyfile,
+  keyfile.private_key,
+  SCOPES,
+  'clearviewcancerinstitute@gmail.com'
+);
 
 const gmail = google.gmail({
   version: 'v1',
-  auth: oAuth2Client
+  auth: jwtClient
 });
 
 async function sendMail(email) {
@@ -46,7 +49,7 @@ async function sendMail(email) {
     .replace(/\//g, '_')
     .replace(/=+$/, '');
 
-  const res = await gmail.users.message.send({
+  const res = await gmail.users.messages.send({
     userId: 'me',
     requestBody: {
       raw: encodedMessage
