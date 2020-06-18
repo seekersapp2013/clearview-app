@@ -1,9 +1,0 @@
-{
-  "apps" : [{
-    "name":  "api-server",
-    "script": "./api.js",
-    "watch": false,
-    "exec_interpreter": "babel-node",
-    "exec_mode": "fork"
-  }]
-}
