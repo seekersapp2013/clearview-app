@@ -2,27 +2,60 @@ import Express from 'express'
 import BodyParser from 'body-parser'
 import Compression from 'compression'
 import CORS from 'express-cors'
-import nodemailer from 'nodemailer'
+import { google } from 'googleapis'
+import path from 'path';
 import {
   DoctorModel,
   HospitalModel,
   PharmacyModel
 } from './models'
 
-const CREDENTIALS = require('./credentials/gmail-account.json');
-const SERVICE_ACCOUNT = require('./credentials/google-service-account-key.json');
+const SCOPES = ['https://www.googleapis.com/auth/gmail.send'];
+const KEYFILE = path.join(__dirname, './credentials/google-service-account-key.json');
 
-let transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
-  auth: {
-    type: 'OAuth2',
-    user: CREDENTIALS.login,
-    serviceClient: SERVICE_ACCOUNT.client_id,
-    privateKey: SERVICE_ACCOUNT.private_key,
-  }
+const oAuth2Client = new google.auth.OAuth2({
+  keyFile: KEYFILE,
+  scopes: SCOPES
 });
+
+const gmail = google.gmail({
+  version: 'v1',
+  auth: oAuth2Client
+});
+
+async function sendMail(email) {
+  email.to = (email.subject === 'Appointment Request via Directory App')
+      ? 'CCI <CCINewPatientScheduler@ccihsv.com>'
+      : 'Leigh Ann Lackey <llackey@ccihsv.com>';
+
+  const messageParts = [
+    email.from,
+    email.to,
+    'Content-Type: text/html; charset=utf-8',
+    'MIME-Version: 1.0',
+    email.subject,
+    '',
+    email.text
+  ];
+
+  const message = messageParts.join('\n');
+
+  const encodedMessage = Buffer.from(message)
+    .toString('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+
+  const res = await gmail.users.message.send({
+    userId: 'me',
+    requestBody: {
+      raw: encodedMessage
+    }
+  });
+
+  console.log('Sent email');
+  return res.data;
+}
 
 const Router = Express.Router()
 let App = Express()
@@ -126,15 +159,12 @@ Router.route('/pharmacies/search/:searchString')
 Router.route('/sendmail/:message')
   .post(function (req, res) {
     let email = JSON.parse(decodeURIComponent(req.params.message));
-    email.to = (email.subject === 'Appointment Request via Directory App')
-      ? 'CCI <CCINewPatientScheduler@ccihsv.com>'
-      : 'Leigh Ann Lackey <llackey@ccihsv.com>';
 
-    transporter.sendMail(email, function (err, info) {
-      const response = (err)
-        ? {error: true, message: 'Error. Please try again later.'}
-        : {error: false, message: 'Success!'};
-      res.json(response);
+    sendMail(email).then(function () {
+      res.json({error: false, message: 'Success'});
+    }).catch(function (err) {
+      console.error(err);
+      res.json({error: true, message: 'Error. Please try again later.'});
     });
   });
 
