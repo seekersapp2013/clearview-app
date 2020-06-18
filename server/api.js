@@ -9,18 +9,15 @@ import {
   PharmacyModel
 } from './models'
 
-const CREDENTIALS = require('./credentials/gmail-account.json');
-const SERVICE_ACCOUNT = require('./credentials/google-service-account-key.json');
+const CREDENTIALS = require('./credentials/mailgun.json');
 
-let transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
+const transporter = nodemailer.createTransport({
+  host: 'smtp.mailgun.org',
   port: 465,
   secure: true,
   auth: {
-    type: 'OAuth2',
-    user: CREDENTIALS.login,
-    serviceClient: SERVICE_ACCOUNT.client_id,
-    privateKey: SERVICE_ACCOUNT.private_key,
+    user: CREDENTIALS.user,
+    pass: CREDENTIALS.pass
   }
 });
 
